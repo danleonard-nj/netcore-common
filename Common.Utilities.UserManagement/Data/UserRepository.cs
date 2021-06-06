@@ -13,6 +13,7 @@
  */
 
 using Common.Models.Authentication.User.Abstractions;
+using Dapper;
 using Dmp.Services.Management.Api.Utilities.UserManagement.Models;
 using Dmp.Services.Management.Api.Utilities.UserManagement.Settings;
 using System;

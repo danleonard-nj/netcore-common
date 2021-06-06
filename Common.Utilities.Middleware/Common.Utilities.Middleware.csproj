@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.Models.AspNetCore\Common.Models.AspNetCore.csproj" />
     <ProjectReference Include="..\Common.Utilities.Authentication\Common.Utilities.Authentication.csproj" />
   </ItemGroup>
 

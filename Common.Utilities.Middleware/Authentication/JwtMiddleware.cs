@@ -14,6 +14,7 @@
 using Common.Utilities.Authentication.Attributes;
 using Common.Utilities.Authentication.Extensions;
 using Common.Utilities.Authentication.Jwt;
+using Common.Utilities.Middleware.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System;
