@@ -1,5 +1,4 @@
-﻿extensions: .cs
-/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2012, 2013 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,3 +11,18 @@
  * for more details.
  */
 
+using Common.Models.Authentication.User.Abstractions;
+
+namespace Dmp.Services.Management.Api.Utilities.UserManagement.Models
+{
+
+		public class UserModel : IUserModel
+		{
+				public int UserId { get; set; }
+				public string Username { get; set; }
+				public string Email { get; set; }
+				public string Role { get; set; }
+				public string Password { get; set; }
+				public string Salt { get; set; }
+		}
+}

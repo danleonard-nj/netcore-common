@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+			<TargetFramework>netcoreapp3.1</TargetFramework>
+			<PackageId>Common.Utilities.Middleware</PackageId>
+			<Version>1.0.0</Version>
+			<Authors>Dan Leonard</Authors>
+			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Utilities.Authentication\Common.Utilities.Authentication.csproj" />
+  </ItemGroup>
+
+</Project>

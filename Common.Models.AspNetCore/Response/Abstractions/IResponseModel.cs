@@ -1,5 +1,4 @@
-﻿extensions: .cs
-/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2012, 2013 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,3 +11,13 @@
  * for more details.
  */
 
+
+namespace Common.Models.AspNetCore.Response.Abstractions
+{
+		public interface IResponseModel
+		{
+				object Content { get; set; }
+				object Exception { get; set; }
+				bool IsError { get; set; }
+		}
+}

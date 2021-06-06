@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+			<PackageId>Common.Utilities.UserManagement</PackageId>
+			<Version>1.0.0</Version>
+			<Authors>Dan Leonard</Authors>
+			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Models.Authentication\Common.Models.Authentication.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Authentication\Common.Utilities.Authentication.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Cryptography\Common.Utilities.Cryptography.csproj" />
+    <ProjectReference Include="..\Common.Utilities.DependencyInjection\Common.Utilities.DependencyInjection.csproj" />
+  </ItemGroup>
+
+</Project>
