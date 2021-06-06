@@ -11,6 +11,7 @@
  * for more details.
  */
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,11 @@ namespace Common.Utilities.Extensions
 						var newType = Convert.ChangeType(obj, typeof(T));
 
 						return (T)newType;
+				}
+
+				public static string SerializeObject(this object obj)
+				{
+						return JsonConvert.SerializeObject(obj);
 				}
 		}
 }

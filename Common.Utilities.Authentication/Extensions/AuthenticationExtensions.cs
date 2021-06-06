@@ -73,12 +73,5 @@ namespace Common.Utilities.Authentication.Extensions
 
 						return securityKey;
 				}
-
-				public static string SerializeObject(this object obj)
-				{
-						return JsonConvert.SerializeObject(obj);
-				}
-
-				
 		}
 }

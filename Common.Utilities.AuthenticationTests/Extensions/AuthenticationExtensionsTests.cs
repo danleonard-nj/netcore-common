@@ -32,11 +32,5 @@ namespace Common.Utilities.Authentication.Extensions.Tests
 				{
 						// Assert.Fail();
 				}
-
-				[TestMethod()]
-				public void SerializeObjectTest()
-				{
-						// Assert.Fail();
-				}
 		}
 }
