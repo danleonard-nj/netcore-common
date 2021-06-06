@@ -13,7 +13,6 @@
 
 using Common.Utilities.Middleware.Response.Abstractions;
 using Common.Utilities.Middleware.Response.Extensions;
-using Common.Utilities.Middleware.Response.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;

@@ -14,7 +14,6 @@
 
 using Common.Models.Authentication.User.Abstractions;
 using Dmp.Services.Management.Api.Utilities.UserManagement.Models;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Models.Interfaces;
 using Dmp.Services.Management.Api.Utilities.UserManagement.Settings;
 using System;
 using System.Data.SqlClient;

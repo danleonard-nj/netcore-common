@@ -12,8 +12,8 @@
  * more details.
  */
 
+using Common.Models.Authentication.User.Abstractions;
 using Common.Utilities.Cryptography;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Models.Interfaces;
 using System;
 
 namespace Dmp.Services.Management.Api.Utilities.UserManagement.Extensions

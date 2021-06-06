@@ -11,6 +11,8 @@
  * for more details.
  */
 
+using Common.Models.AspNetCore.Response.Abstractions;
+
 namespace Common.Utilities.Middleware.Authentication.Models
 {
 		public class JwtMiddlewareResponseModel : IResponseModel

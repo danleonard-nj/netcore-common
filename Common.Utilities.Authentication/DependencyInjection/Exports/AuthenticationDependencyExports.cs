@@ -15,7 +15,7 @@ using Common.Utilities.Authentication.Jwt;
 using Common.Utilities.Authentication.Settings;
 using Common.Utilities.DependencyInjection;
 using Common.Utilities.DependencyInjection.Exports.Types;
-using Common.Utilities.DependencyInjection.Exports.Types.Interfaces;
+using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;

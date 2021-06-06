@@ -11,7 +11,7 @@
  * for more details.
  */
 
-using Common.Utilities.Middleware.Interfaces;
+using Common.Utilities.Middleware.Abstractions;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
@@ -19,9 +19,9 @@ namespace Common.Utilities.Middleware.ExceptionHandlerMiddleware
 {
 		public class ExceptionHandlerMiddleware : ICustomMiddleware
 		{
-				public Task Invoke(HttpContext context)
+				public async Task Invoke(HttpContext context)
 				{
-						throw new System.NotImplementedException();
+						await Task.Yield();
 				}
 		}
 }

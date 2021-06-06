@@ -18,7 +18,6 @@ using Common.Utilities.Cryptography;
 using Dmp.Services.Management.Api.Utilities.UserManagement.Data;
 using Dmp.Services.Management.Api.Utilities.UserManagement.Exceptions;
 using Dmp.Services.Management.Api.Utilities.UserManagement.Extensions;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Models.Interfaces;
 using System;
 using System.Security.Authentication;
 using System.Threading.Tasks;
