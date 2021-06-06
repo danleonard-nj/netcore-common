@@ -15,12 +15,12 @@
 using Common.Utilities.Cryptography;
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Components;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Data;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Settings;
+using Common.Utilities.UserManagement.Components;
+using Common.Utilities.UserManagement.Data;
+using Common.Utilities.UserManagement.Settings;
 using System.Collections.Generic;
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.DependencyInjection.Exports
+namespace Common.Utilities.UserManagement.DependencyInjection.Exports
 {
 		public class UserManagementDependencyExports : IDependencyExport
 		{

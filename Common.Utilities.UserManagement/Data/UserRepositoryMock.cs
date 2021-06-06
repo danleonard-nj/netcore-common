@@ -13,10 +13,10 @@
  */
 
 using Common.Models.Authentication.User.Abstractions;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Models;
+using Common.Utilities.UserManagement.Models;
 using System.Threading.Tasks;
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.Data
+namespace Common.Utilities.UserManagement.Data
 {
 		public class UserRepositoryMock : IUserRepository
 		{

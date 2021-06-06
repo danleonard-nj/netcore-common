@@ -15,14 +15,14 @@
 using Common.Models.Authentication.User.Abstractions;
 using Common.Utilities.Authentication.Jwt;
 using Common.Utilities.Cryptography;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Data;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Exceptions;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Extensions;
+using Common.Utilities.UserManagement.Data;
+using Common.Utilities.UserManagement.Exceptions;
+using Common.Utilities.UserManagement.Extensions;
 using System;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.Components
+namespace Common.Utilities.UserManagement.Components
 {
 		public interface IUserManagementComponent
 		{

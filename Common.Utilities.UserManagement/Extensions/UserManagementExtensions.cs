@@ -16,7 +16,7 @@ using Common.Models.Authentication.User.Abstractions;
 using Common.Utilities.Cryptography;
 using System;
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.Extensions
+namespace Common.Utilities.UserManagement.Extensions
 {
 		public static class UserManagementExtensions
 		{

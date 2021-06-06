@@ -14,7 +14,7 @@
 
 using System;
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.Exceptions
+namespace Common.Utilities.UserManagement.Exceptions
 {
 		public class UserException : Exception
 		{

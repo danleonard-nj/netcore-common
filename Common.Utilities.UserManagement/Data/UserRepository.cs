@@ -14,13 +14,13 @@
 
 using Common.Models.Authentication.User.Abstractions;
 using Dapper;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Models;
-using Dmp.Services.Management.Api.Utilities.UserManagement.Settings;
+using Common.Utilities.UserManagement.Models;
+using Common.Utilities.UserManagement.Settings;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.Data
+namespace Common.Utilities.UserManagement.Data
 {
 		public interface IUserRepository
 		{

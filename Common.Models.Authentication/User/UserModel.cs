@@ -13,7 +13,7 @@
 
 using Common.Models.Authentication.User.Abstractions;
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.Models
+namespace Common.Utilities.UserManagement.Models
 {
 
 		public class UserModel : IUserModel

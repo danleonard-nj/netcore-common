@@ -12,7 +12,7 @@
  * more details.
  */
 
-namespace Dmp.Services.Management.Api.Utilities.UserManagement.Settings
+namespace Common.Utilities.UserManagement.Settings
 {
 		public class UserManagementSettings
 		{
