@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common.Utilities.UserManagement\Common.Utilities.UserManagement.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Middleware\Common.Utilities.Middleware.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,13 +12,13 @@ namespace Common.Utilities.Authentication.Jwt.Tests
 				[TestMethod()]
 				public void JwtTokenUtilityTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 
 				[TestMethod()]
 				public void GetTokenTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 		}
 }

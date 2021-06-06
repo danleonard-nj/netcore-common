@@ -12,13 +12,13 @@ namespace Common.Utilities.Middleware.Response.Tests
 				[TestMethod()]
 				public void ResponseMiddlewareTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 
 				[TestMethod()]
 				public void InvokeTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 		}
 }

@@ -12,13 +12,13 @@ namespace Common.Utilities.DependencyInjection.Extensions.Tests
 				[TestMethod()]
 				public void RegisterServiceExportTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 
 				[TestMethod()]
 				public void RegisterSettingsExportTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 		}
 }

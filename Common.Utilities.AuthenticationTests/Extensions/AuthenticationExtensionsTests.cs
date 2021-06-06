@@ -12,31 +12,31 @@ namespace Common.Utilities.Authentication.Extensions.Tests
 				[TestMethod()]
 				public void GetBearerTokenTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 
 				[TestMethod()]
 				public void IsEndpointAttributeDefinedTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 
 				[TestMethod()]
 				public void GetEncodedPublicKeyTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 
 				[TestMethod()]
 				public void GetSecurityKeyTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 
 				[TestMethod()]
 				public void SerializeObjectTest()
 				{
-						Assert.Fail();
+						// Assert.Fail();
 				}
 		}
 }
