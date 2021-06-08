@@ -33,13 +33,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Models.AspNetCore", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D395BB7C-F4A0-4CCD-9212-4DF6F9C3A5AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utilities.DependencyInjectionTests", "Common.Utilities.DependencyInjectionTests\Common.Utilities.DependencyInjectionTests.csproj", "{FB4F24E7-8815-4C30-812A-23C11E9EA8E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.DependencyInjectionTests", "Common.Utilities.DependencyInjectionTests\Common.Utilities.DependencyInjectionTests.csproj", "{FB4F24E7-8815-4C30-812A-23C11E9EA8E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utilities.AuthenticationTests", "Common.Utilities.AuthenticationTests\Common.Utilities.AuthenticationTests.csproj", "{7B5E6B5D-9F14-4F38-9180-6E2BAD4686E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.AuthenticationTests", "Common.Utilities.AuthenticationTests\Common.Utilities.AuthenticationTests.csproj", "{7B5E6B5D-9F14-4F38-9180-6E2BAD4686E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utilities.MiddlewareTests", "Common.Utilities.MiddlewareTests\Common.Utilities.MiddlewareTests.csproj", "{51F1E288-DF1A-43BA-87A0-983A2016A936}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.MiddlewareTests", "Common.Utilities.MiddlewareTests\Common.Utilities.MiddlewareTests.csproj", "{51F1E288-DF1A-43BA-87A0-983A2016A936}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utilities.UserManagementTests", "Common.Utilities.UserManagementTests\Common.Utilities.UserManagementTests.csproj", "{8788CBC1-FF2D-4C47-BC71-00B59B29D5DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.UserManagementTests", "Common.Utilities.UserManagementTests\Common.Utilities.UserManagementTests.csproj", "{8788CBC1-FF2D-4C47-BC71-00B59B29D5DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.Data", "Common.Utilities.Data\Common.Utilities.Data.csproj", "{44825EC2-704D-443E-8ED9-D7C3EEF07676}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.UnitTesting", "Common.Utilities.UnitTesting\Common.Utilities.UnitTesting.csproj", "{5AAAE985-340E-4B4C-BE81-2AE1637A034C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +123,14 @@ Global
 		{8788CBC1-FF2D-4C47-BC71-00B59B29D5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8788CBC1-FF2D-4C47-BC71-00B59B29D5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8788CBC1-FF2D-4C47-BC71-00B59B29D5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44825EC2-704D-443E-8ED9-D7C3EEF07676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44825EC2-704D-443E-8ED9-D7C3EEF07676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44825EC2-704D-443E-8ED9-D7C3EEF07676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44825EC2-704D-443E-8ED9-D7C3EEF07676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AAAE985-340E-4B4C-BE81-2AE1637A034C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AAAE985-340E-4B4C-BE81-2AE1637A034C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AAAE985-340E-4B4C-BE81-2AE1637A034C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AAAE985-340E-4B4C-BE81-2AE1637A034C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

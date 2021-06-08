@@ -13,9 +13,9 @@
  */
 
 using Common.Models.Authentication.User.Abstractions;
-using Dapper;
 using Common.Utilities.UserManagement.Models;
 using Common.Utilities.UserManagement.Settings;
+using Dapper;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
