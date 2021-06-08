@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Utilities.Authentication\Common.Utilities.Authentication.csproj" />
+    <ProjectReference Include="..\Common.Utilities.UnitTesting\Common.Utilities.UnitTesting.csproj" />
   </ItemGroup>
 
 </Project>
