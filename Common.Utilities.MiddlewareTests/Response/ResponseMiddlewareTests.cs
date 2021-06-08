@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Common.Utilities.Middleware.Response;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Common.Utilities.Middleware.Response.Tests
 {

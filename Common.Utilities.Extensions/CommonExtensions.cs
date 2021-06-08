@@ -20,6 +20,8 @@ namespace Common.Utilities.Extensions
 {
 		public static class CommonExtensions
 		{
+				#region String Extensions
+
 				public static string Format(this string input, object values)
 				{
 						var pairs = values.ToKeyValuePairs();
@@ -33,6 +35,44 @@ namespace Common.Utilities.Extensions
 						return input;
 				}
 
+				#endregion
+
+				#region Dictionary Extensions
+
+				public static T Get<T>(this Dictionary<string, object> dictionary, string key)
+				{
+						if (dictionary.ContainsKey(key))
+						{
+								return (T)dictionary[key];
+						}
+
+						return default;
+				}
+
+				public static object Get(this Dictionary<string, object> dictionary, string key)
+				{
+						if (dictionary.ContainsKey(key))
+						{
+								return dictionary[key];
+						}
+
+						return default;
+				}
+
+				public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(this Dictionary<TKey, TValue> pairs, Dictionary<TKey, TValue> range)
+				{
+						foreach (var pair in range)
+						{
+								pairs.Add(pair.Key, pair.Value);
+						}
+
+						return pairs;
+				}
+
+				#endregion
+
+				#region Reflection Extensions
+
 				public static IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs(this object values)
 				{
 						var props = values.GetType().GetProperties();
@@ -42,6 +82,10 @@ namespace Common.Utilities.Extensions
 						return pairs;
 				}
 
+				#endregion
+
+				#region Type Extensions
+
 				public static T AsType<T>(this object obj)
 				{
 						var newType = Convert.ChangeType(obj, typeof(T));
@@ -49,9 +93,15 @@ namespace Common.Utilities.Extensions
 						return (T)newType;
 				}
 
+				#endregion
+
+				#region Serialization Extensions
+
 				public static string SerializeObject(this object obj)
 				{
 						return JsonConvert.SerializeObject(obj);
 				}
+
+				#endregion
 		}
 }

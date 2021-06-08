@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Common.Utilities.Authentication.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Common.Utilities.Authentication.Extensions.Tests
 {
