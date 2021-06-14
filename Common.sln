@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.Data", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.UnitTesting", "Common.Utilities.UnitTesting\Common.Utilities.UnitTesting.csproj", "{5AAAE985-340E-4B4C-BE81-2AE1637A034C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Utilities.Swagger", "Common.Utilities.Swagger\Common.Utilities.Swagger.csproj", "{1E152995-5B92-4FEC-BC34-9D8A047DD5CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{5AAAE985-340E-4B4C-BE81-2AE1637A034C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AAAE985-340E-4B4C-BE81-2AE1637A034C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AAAE985-340E-4B4C-BE81-2AE1637A034C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E152995-5B92-4FEC-BC34-9D8A047DD5CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E152995-5B92-4FEC-BC34-9D8A047DD5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E152995-5B92-4FEC-BC34-9D8A047DD5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E152995-5B92-4FEC-BC34-9D8A047DD5CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
