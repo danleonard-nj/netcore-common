@@ -12,13 +12,18 @@
  */
 
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Common.Utilities.Cryptography
 {
 		public interface ICryptoUtility
 		{
+				string CreateHash(object source, bool serialize = false);
+				string CreateHash(object[] sources, bool serialize = false);
 				SaltedHash GenerateSaltedHash(string password);
 				string GenerateSaltedHash(string password, byte[] salt);
 				string GenerateSaltedHash(string password, string salt);
@@ -32,16 +37,27 @@ namespace Common.Utilities.Cryptography
 						_rngCryptoProvider = new RNGCryptoServiceProvider();
 				}
 
-				public bool VerifySaltedHash(string provided, string saltedHash, string salt)
+				public string CreateHash(object source, bool serialize = false)
 				{
-						var hash = GenerateSaltedHash(provided, salt);
+						var sourceString = serialize ? JsonConvert.SerializeObject(source) : source;
+						var bytes = Encoding.UTF8.GetBytes(sourceString.ToString());
+						var hash = Convert.ToBase64String(bytes);
 
-						if (saltedHash == hash)
-						{
-								return true;
-						}
+						return hash;
+				}
 
-						return false;
+				public string CreateHash(object[] sources, bool serialize = false)
+				{
+						var strings = sources
+								.Select(x => x?.ToString() ?? string.Empty)
+								.Select(x => serialize ? JsonConvert.SerializeObject(x) : x);
+
+						var joined = string.Join(string.Empty, strings);
+
+						var bytes = Encoding.UTF8.GetBytes(joined);
+						var hash = Convert.ToBase64String(bytes);
+
+						return hash;
 				}
 
 				public SaltedHash GenerateSaltedHash(string password)
@@ -76,6 +92,18 @@ namespace Common.Utilities.Cryptography
 						var hash = GenerateSaltedHash(password, saltBytes);
 
 						return hash;
+				}
+
+				public bool VerifySaltedHash(string provided, string saltedHash, string salt)
+				{
+						var hash = GenerateSaltedHash(provided, salt);
+
+						if (saltedHash == hash)
+						{
+								return true;
+						}
+
+						return false;
 				}
 
 				private byte[] GetSalt()
