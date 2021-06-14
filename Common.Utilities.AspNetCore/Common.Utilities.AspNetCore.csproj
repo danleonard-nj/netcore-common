@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 			<PackageId>Common.Utilities.AspNetCore</PackageId>
-			<Version>1.1.1</Version>
+			<Version>1.2.1</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
@@ -27,6 +27,7 @@
     <ProjectReference Include="..\Common.Utilities.Helpers\Common.Utilities.Helpers.csproj" />
     <ProjectReference Include="..\Common.Utilities.Logging\Common.Utilities.Logging.csproj" />
     <ProjectReference Include="..\Common.Utilities.Middleware\Common.Utilities.Middleware.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Swagger\Common.Utilities.Swagger.csproj" />
     <ProjectReference Include="..\Common.Utilities.UnitTesting\Common.Utilities.UnitTesting.csproj" />
     <ProjectReference Include="..\Common.Utilities.UserManagement\Common.Utilities.UserManagement.csproj" />
   </ItemGroup>
