@@ -12,17 +12,17 @@
  */
 
 
-using Microsoft.Extensions.Configuration;
+using System;
 
-namespace Common.Utilities.Configuration.Extensions
+namespace Common.Utilities.Reflection
 {
-		public static class ConfigurationExtensions
+		public static class ReflectionExtensions
 		{
-				public static T GetInstance<T>(this IConfiguration configuration)
+				public static void UpdateProperty(this object obj, string propertyName, object value)
 				{
-						var instance = configuration.GetSection(typeof(T).Name).Get<T>();
+						var property = obj.GetType().GetProperty(propertyName);
 
-						return instance;
+						property.SetValue(obj, value);
 				}
 		}
 }

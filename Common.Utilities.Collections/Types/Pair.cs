@@ -11,18 +11,11 @@
  * for more details.
  */
 
-
-using Microsoft.Extensions.Configuration;
-
-namespace Common.Utilities.Configuration.Extensions
+namespace Common.Utilities.Collections
 {
-		public static class ConfigurationExtensions
+		public class Pair<TKey, TValue>
 		{
-				public static T GetInstance<T>(this IConfiguration configuration)
-				{
-						var instance = configuration.GetSection(typeof(T).Name).Get<T>();
-
-						return instance;
-				}
+				public TKey Key { get; set; }
+				public TValue Value { get; set; }
 		}
 }

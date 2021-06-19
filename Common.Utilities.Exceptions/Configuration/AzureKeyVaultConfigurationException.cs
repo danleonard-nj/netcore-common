@@ -12,17 +12,15 @@
  */
 
 
-using Microsoft.Extensions.Configuration;
+using System;
 
-namespace Common.Utilities.Configuration.Extensions
+namespace Common.Utilities.Exceptions.Configuration
 {
-		public static class ConfigurationExtensions
+		public class AzureKeyVaultConfigurationException : Exception
 		{
-				public static T GetInstance<T>(this IConfiguration configuration)
+				public AzureKeyVaultConfigurationException(string message)
+						: base(message)
 				{
-						var instance = configuration.GetSection(typeof(T).Name).Get<T>();
-
-						return instance;
 				}
 		}
 }

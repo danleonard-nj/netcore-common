@@ -3,7 +3,7 @@
   <PropertyGroup>
 			<TargetFramework>netcoreapp3.1</TargetFramework>
 			<PackageId>Common.Utilities.DependencyInjection</PackageId>
-			<Version>1.0.0</Version>
+			<Version>2.0.0</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -12,6 +12,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Utilities.Configuration\Common.Utilities.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

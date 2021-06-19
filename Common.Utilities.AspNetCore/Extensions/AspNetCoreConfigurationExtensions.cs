@@ -11,6 +11,7 @@
  * for more details.
  */
 
+using Common.Models.AspNetCore.Options;
 using Common.Utilities.Authentication.DependencyInjection.Exports;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Registration;
@@ -22,11 +23,14 @@ namespace Common.Utilities.AspNetCore.Extensions
 {
 		public static class AspNetCoreConfigurationExtensions
 		{
-				public static void ConfigureAspNetCoreServices<TDependencyExports>(this IServiceCollection serviceDescriptors) where TDependencyExports : IDependencyExport
+				public static void ConfigureAspNetCoreServices<TDependencyExports>(this IServiceCollection serviceDescriptors,
+						ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) where TDependencyExports : IDependencyExport
 				{
+						var options = configureAspNetCoreServicesOptions ?? new ConfigureAspNetCoreServicesOptions();
+
 						var configuration = GetConfiguration();
 
-						var exportRegistration = new DependencyExportRegistration();
+						var exportRegistration = new DependencyExportRegistration(configuration, options.InjectKeyVaultSecrets);
 
 						// Internal dependencies
 

@@ -11,12 +11,13 @@
  * for more details.
  */
 
-using Common.Utilities.DependencyInjection.Exports;
+using Common.Utilities.Configuration.Binding;
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,19 +25,19 @@ namespace Common.Utilities.DependencyInjection.Registration
 {
 		public class DependencyExportRegistration
 		{
-				public DependencyExportRegistration()
+				public DependencyExportRegistration(IConfiguration configuration, bool injectAzureKeyVaultSecrets = false)
 				{
-						_exportFactory = new DependencyExportFactory();						
+						_binder = new Binder(configuration, injectAzureKeyVaultSecrets);
 				}
 
 				public void RegisterDependencies<T>(IServiceCollection serviceDescriptors, IConfiguration configuration)
 						where T : IDependencyExport
 				{
-						var exports = _exportFactory.GetExports<T>();
+						var exports = CreateDependencyExportInstance<T>();
 
 						var settingsExports = exports.GetSettingsExports();
 
-						RegisterSettingsExports(settingsExports, serviceDescriptors, configuration);
+						RegisterSettingsExports(settingsExports, serviceDescriptors);
 
 						var serviceExports = exports.GetServiceExports();
 
@@ -52,14 +53,23 @@ namespace Common.Utilities.DependencyInjection.Registration
 				}
 
 				private void RegisterSettingsExports(IEnumerable<ISettingsExport> settingsExports,
-						IServiceCollection serviceDescriptors,
-						IConfiguration configuration)
+						IServiceCollection serviceDescriptors)
 				{
-						var settingsList = settingsExports.ToList();
+						foreach (var settingsExport in settingsExports)
+						{
+								var instance = _binder.BindConfiguration(settingsExport.Type);
 
-						settingsList.ForEach(x => x.RegisterSettingsExport(serviceDescriptors, configuration));
+								serviceDescriptors.AddSingleton(settingsExport.Type, instance);
+						}
 				}
 
-				private readonly IDependencyExportFactory _exportFactory;
+				private T CreateDependencyExportInstance<T>()
+				{
+						var instance = Activator.CreateInstance<T>();
+
+						return instance;
+				}
+
+				private readonly IBinder _binder;
 		}
 }
