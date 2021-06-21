@@ -16,15 +16,18 @@ using Common.Utilities.Authentication.DependencyInjection.Exports;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Registration;
 using Common.Utilities.UserManagement.DependencyInjection.Exports;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Common.Utilities.AspNetCore.Extensions
 {
 		public static class AspNetCoreConfigurationExtensions
 		{
 				public static void ConfigureAspNetCoreServices<TDependencyExports>(this IServiceCollection serviceDescriptors,
-						ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) where TDependencyExports : IDependencyExport
+						IWebHostEnvironment webHostEnvironment, ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) 
+						where TDependencyExports : IDependencyExport
 				{
 						var options = configureAspNetCoreServicesOptions ?? new ConfigureAspNetCoreServicesOptions();
 
@@ -46,11 +49,20 @@ namespace Common.Utilities.AspNetCore.Extensions
 						serviceDescriptors.AddSwaggerGen();
 				}
 
-				public static IConfiguration GetConfiguration()
+				public static IConfiguration GetConfiguration(IWebHostEnvironment hostEnvironment)
 				{
-						var configuration = new ConfigurationBuilder()
-								.AddJsonFile("appsettings.json")
-								.Build();
+						var configurationBuilder = new ConfigurationBuilder();
+
+						if (hostEnvironment.IsDevelopment())
+						{
+								configurationBuilder.AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true);
+						}
+						else
+						{
+								configurationBuilder.AddJsonFile("appsettings.json", optional: true);
+						}
+
+						var configuration = configurationBuilder.Build();
 
 						return configuration;
 				}
