@@ -11,14 +11,12 @@
  * for more details.
  */
 
-using Common.Utilities.Configuration;
 using Common.Utilities.Configuration.Binding;
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +25,9 @@ namespace Common.Utilities.DependencyInjection.Registration
 {
 		public class DependencyExportRegistration
 		{
-				public DependencyExportRegistration(IHostEnvironment environment, bool injectAzureKeyVaultSecrets = false)
+				public DependencyExportRegistration(IConfiguration configuration, bool injectAzureKeyVaultSecrets = false)
 				{
-						_managedConfiguration = new ManagedConfiguration()
-								.GetConfiguration(environment);
-
-						_binder = new Binder(_managedConfiguration, injectAzureKeyVaultSecrets);
+						_binder = new Binder(configuration, injectAzureKeyVaultSecrets);
 				}
 
 				public void RegisterDependencies<T>(IServiceCollection serviceDescriptors)

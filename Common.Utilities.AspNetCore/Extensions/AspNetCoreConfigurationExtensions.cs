@@ -16,8 +16,8 @@ using Common.Utilities.Authentication.DependencyInjection.Exports;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Registration;
 using Common.Utilities.UserManagement.DependencyInjection.Exports;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 
 namespace Common.Utilities.AspNetCore.Extensions
@@ -27,12 +27,12 @@ namespace Common.Utilities.AspNetCore.Extensions
 				[Obsolete]
 				// Using IHostingEnvironemtn due to issues with IWebHostEnvironment in extenal classes
 				public static void ConfigureAspNetCoreServices<TDependencyExports>(this IServiceCollection serviceDescriptors,
-						IHostEnvironment hostEnvironment, ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) 
+						IConfiguration configuration, ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) 
 						where TDependencyExports : IDependencyExport
 				{
 						var options = configureAspNetCoreServicesOptions ?? new ConfigureAspNetCoreServicesOptions();
 
-						var exportRegistration = new DependencyExportRegistration(hostEnvironment, options.InjectKeyVaultSecrets);
+						var exportRegistration = new DependencyExportRegistration(configuration, options.InjectKeyVaultSecrets);
 
 						// Internal dependencies
 
