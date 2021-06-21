@@ -12,18 +12,11 @@
  */
 
 
-using Microsoft.Extensions.Configuration;
-using System.Linq;
+using System;
 
-namespace Common.Utilities.Configuration.Extensions
+namespace Common.Utilities.Configuration.AzureKeyVault.Attributes
 {
-		public static class ConfigurationExtensions
+		public class AzureKeyVaultSecretAttribute : Attribute
 		{
-				public static T GetInstance<T>(this IConfiguration configuration)
-				{
-						var instance = configuration.GetSection(typeof(T).Name).Get<T>();
-
-						return instance;
-				}
 		}
 }

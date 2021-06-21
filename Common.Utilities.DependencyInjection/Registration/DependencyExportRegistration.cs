@@ -12,10 +12,10 @@
  */
 
 using Common.Utilities.Configuration.Binding;
+using Common.Utilities.Configuration.Managed;
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Extensions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -25,9 +25,14 @@ namespace Common.Utilities.DependencyInjection.Registration
 {
 		public class DependencyExportRegistration
 		{
-				public DependencyExportRegistration(IConfiguration configuration, bool injectAzureKeyVaultSecrets = false)
+				public DependencyExportRegistration(IManagedConfiguration managedConfiguration)
 				{
-						_binder = new Binder(configuration, injectAzureKeyVaultSecrets);
+						if (managedConfiguration == null)
+						{
+								throw new ArgumentNullException(nameof(managedConfiguration));
+						}
+
+						_binder = new Binder(managedConfiguration);
 				}
 
 				public void RegisterDependencies<T>(IServiceCollection serviceDescriptors)
@@ -71,6 +76,6 @@ namespace Common.Utilities.DependencyInjection.Registration
 				}
 
 				private readonly IBinder _binder;
-				private readonly IConfiguration _managedConfiguration;
+				private readonly IManagedConfiguration _managedConfiguration;
 		}
 }

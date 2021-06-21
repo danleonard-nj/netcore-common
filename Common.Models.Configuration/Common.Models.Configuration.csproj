@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-			<PackageId>Common.Utilities.Exceptions</PackageId>
-			<Version>2.1.0</Version>
+			<TargetFramework>netcoreapp3.1</TargetFramework>
+			<PackageId>Common.Models.Configuration</PackageId>
+			<Version>2.0.1</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

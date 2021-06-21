@@ -12,11 +12,10 @@
  */
 
 
-using System;
-
-namespace Common.Utilities.Configuration.AzureKeyVault.Attributes
+namespace Common.Models.Configuration.Settings
 {
-		public class KeyVaultSecretAttribute : Attribute
+		public class AzureKeyVaultConfigurationSettings
 		{
+				public string AzureKeyVaultUri { get; set; }
 		}
 }

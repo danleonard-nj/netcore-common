@@ -13,6 +13,7 @@
 
 
 using Common.Utilities.Configuration.AzureKeyVault.Extensions;
+using Common.Utilities.Configuration.Managed;
 using Microsoft.Extensions.Configuration;
 using System;
 
@@ -26,23 +27,25 @@ namespace Common.Utilities.Configuration.Binding
 
 		public class Binder : IBinder
 		{
-				public Binder(IConfiguration configuration, bool addAzureKeyVault = false)
+				public Binder(IManagedConfiguration configuration, bool addAzureKeyVault = false)
 				{
-						_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-						_addAzureKeyVault = addAzureKeyVault;
+						_managedConfiguration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 				}
 
 				public object BindConfiguration(Type type)
 				{
 						var instance = Activator.CreateInstance(type);
 
-						_configuration.GetSection(type.Name).Bind(instance);
+						_managedConfiguration.BuildDefaultConfiguration();
+						var configuration = _managedConfiguration.GetConfiguration();
 
-						if (_addAzureKeyVault)
+						configuration.GetSection(type.Name).Bind(instance);
+
+						if (_managedConfiguration.IsKeyVault)
 						{
-								if (instance.KeyVaultValuesDefined())
+								if (instance.KeyVaultAttributesDefined())
 								{
-										InjectKeyVaultVariables(instance, _configuration);
+										InjectKeyVaultVariables(instance, _managedConfiguration);
 								}
 						}
 
@@ -58,14 +61,15 @@ namespace Common.Utilities.Configuration.Binding
 						return (T)instance;
 				}
 
-				private void InjectKeyVaultVariables(object instance, IConfiguration configuration)
+				private void InjectKeyVaultVariables(object instance, IManagedConfiguration managedConfiguration)
 				{
-						var keyVaultConfiguration = configuration.GetAzureKeyVaultConfiguration();
+						managedConfiguration.BuildAzureKeyVaultConfiguration();
 
-						instance.InjectKeyVaultVariables(keyVaultConfiguration);
+						var keyVaultConfiguration = managedConfiguration.GetConfiguration();
+
+						instance.InjectKeyVaultValues(keyVaultConfiguration);
 				}
 
-				private readonly IConfiguration _configuration;
-				private bool _addAzureKeyVault;
+				private readonly IManagedConfiguration _managedConfiguration;
 		}
 }

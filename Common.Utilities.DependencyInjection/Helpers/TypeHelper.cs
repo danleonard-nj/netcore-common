@@ -12,7 +12,6 @@
  */
 
 using Common.Utilities.DependencyInjection.Exceptions;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -21,24 +20,6 @@ namespace Common.Utilities.DependencyInjection.Helpers
 {
 		public static class TypeHelper
 		{
-				public static object GetInstance(IConfiguration configuration, Type instanceType)
-				{
-						var instance = Activator.CreateInstance(instanceType);
-
-						configuration.GetSection(instanceType.Name).Bind(instance);
-
-						return instance;
-				}
-
-				public static T GetInstance<T>(IConfiguration configuration)
-				{
-						var instance = Activator.CreateInstance(typeof(T));
-
-						configuration.GetSection(typeof(T).Name).Bind(instance);
-
-						return (T)instance;
-				}
-
 				public static Type GetImplementationType(Type serviceType)
 				{
 						var implementationTypes = Assembly.GetEntryAssembly()

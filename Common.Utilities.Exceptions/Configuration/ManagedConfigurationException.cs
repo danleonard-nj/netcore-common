@@ -13,22 +13,14 @@
 
 
 using System;
-using System.Net;
 
-namespace Common.Utilities.Exceptions
+namespace Common.Utilities.Exceptions.Configuration
 {
-		public class DmpException : Exception
+		public class ManagedConfigurationException : Exception
 		{
-				public string Caller { get; set; }
-				public string Type { get; set; }
-				public HttpStatusCode StatusCode { get; set; }
-
-				public DmpException(string message, string caller = null, string type = null, HttpStatusCode httpStatusCode = default)
+				public ManagedConfigurationException(string message)
 						: base(message)
 				{
-						Caller = caller;
-						Type = type ?? GetType().Name;
-						StatusCode = httpStatusCode == default ? HttpStatusCode.InternalServerError : httpStatusCode;
 				}
 		}
 }

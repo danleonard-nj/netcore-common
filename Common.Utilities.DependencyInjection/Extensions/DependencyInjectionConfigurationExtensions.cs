@@ -13,7 +13,6 @@
 
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Helpers;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Common.Utilities.DependencyInjection.Extensions
@@ -39,11 +38,6 @@ namespace Common.Utilities.DependencyInjection.Extensions
 								default:
 										break;
 						}
-				}
-
-				public static void RegisterSettingsExport(this ISettingsExport settingsExport, IServiceCollection serviceDescriptors, IConfiguration configuration)
-				{
-						serviceDescriptors.AddSingleton(settingsExport.Type, TypeHelper.GetInstance(configuration, settingsExport.Type));
 				}
 		}
 }

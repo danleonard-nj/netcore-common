@@ -17,10 +17,10 @@ namespace Common.Utilities.Authentication.Settings
 {
 		public class AuthenticationSettings
 		{
-				[KeyVaultSecret]
+				[AzureKeyVaultSecret]
 				public string PublicKey { get; set; }
 
-				[KeyVaultSecret]
+				[AzureKeyVaultSecret]
 				public string SqlConnectionString { get; set; }
 		}
 }
