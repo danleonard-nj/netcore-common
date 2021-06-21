@@ -11,11 +11,16 @@
  * for more details.
  */
 
+using Common.Utilities.Configuration.AzureKeyVault.Attributes;
+
 namespace Common.Utilities.Authentication.Settings
 {
 		public class AuthenticationSettings
 		{
+				[KeyVaultSecret]
 				public string PublicKey { get; set; }
+
+				[KeyVaultSecret]
 				public string SqlConnectionString { get; set; }
 		}
 }
