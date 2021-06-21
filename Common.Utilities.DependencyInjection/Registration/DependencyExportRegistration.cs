@@ -16,9 +16,9 @@ using Common.Utilities.Configuration.Binding;
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Extensions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace Common.Utilities.DependencyInjection.Registration
 {
 		public class DependencyExportRegistration
 		{
-				public DependencyExportRegistration(IHostingEnvironment environment, bool injectAzureKeyVaultSecrets = false)
+				public DependencyExportRegistration(IHostEnvironment environment, bool injectAzureKeyVaultSecrets = false)
 				{
 						_managedConfiguration = new ManagedConfiguration()
 								.GetConfiguration(environment);

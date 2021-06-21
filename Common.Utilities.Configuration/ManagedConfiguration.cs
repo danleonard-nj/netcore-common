@@ -14,17 +14,18 @@
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Common.Utilities.Configuration
 {
 		public interface IManagedConfiguration
 		{
-				IConfiguration GetConfiguration(IHostingEnvironment hostingEnvironment);
+				IConfiguration GetConfiguration(IHostEnvironment hostingEnvironment);
 		}
 
 		public class ManagedConfiguration : IManagedConfiguration
 		{
-				public IConfiguration GetConfiguration(IHostingEnvironment hostingEnvironment)
+				public IConfiguration GetConfiguration(IHostEnvironment hostingEnvironment)
 				{
 						var builder = new ConfigurationBuilder();
 
