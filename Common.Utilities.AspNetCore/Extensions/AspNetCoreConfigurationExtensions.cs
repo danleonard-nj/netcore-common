@@ -31,7 +31,7 @@ namespace Common.Utilities.AspNetCore.Extensions
 				{
 						var options = configureAspNetCoreServicesOptions ?? new ConfigureAspNetCoreServicesOptions();
 
-						var configuration = GetConfiguration();
+						var configuration = GetConfiguration(webHostEnvironment);
 
 						var exportRegistration = new DependencyExportRegistration(configuration, options.InjectKeyVaultSecrets);
 
