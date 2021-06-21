@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Common.Models.AspNetCore.Options
+﻿namespace Common.Models.AspNetCore.Options
 {
 		public class ConfigureAspNetCoreServicesOptions
 		{

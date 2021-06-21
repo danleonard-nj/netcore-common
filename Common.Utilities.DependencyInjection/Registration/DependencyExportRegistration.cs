@@ -11,10 +11,12 @@
  * for more details.
  */
 
+using Common.Utilities.Configuration;
 using Common.Utilities.Configuration.Binding;
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -25,12 +27,15 @@ namespace Common.Utilities.DependencyInjection.Registration
 {
 		public class DependencyExportRegistration
 		{
-				public DependencyExportRegistration(IConfiguration configuration, bool injectAzureKeyVaultSecrets = false)
+				public DependencyExportRegistration(IHostingEnvironment environment, bool injectAzureKeyVaultSecrets = false)
 				{
-						_binder = new Binder(configuration, injectAzureKeyVaultSecrets);
+						_managedConfiguration = new ManagedConfiguration()
+								.GetConfiguration(environment);
+
+						_binder = new Binder(_managedConfiguration, injectAzureKeyVaultSecrets);
 				}
 
-				public void RegisterDependencies<T>(IServiceCollection serviceDescriptors, IConfiguration configuration)
+				public void RegisterDependencies<T>(IServiceCollection serviceDescriptors)
 						where T : IDependencyExport
 				{
 						var exports = CreateDependencyExportInstance<T>();
@@ -71,5 +76,6 @@ namespace Common.Utilities.DependencyInjection.Registration
 				}
 
 				private readonly IBinder _binder;
+				private readonly IConfiguration _managedConfiguration;
 		}
 }

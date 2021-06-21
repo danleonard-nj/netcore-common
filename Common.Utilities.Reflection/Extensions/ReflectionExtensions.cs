@@ -11,9 +11,6 @@
  * for more details.
  */
 
-
-using System;
-
 namespace Common.Utilities.Reflection
 {
 		public static class ReflectionExtensions

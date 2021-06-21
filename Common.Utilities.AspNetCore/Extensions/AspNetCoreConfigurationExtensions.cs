@@ -17,54 +17,35 @@ using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Registration;
 using Common.Utilities.UserManagement.DependencyInjection.Exports;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Common.Utilities.AspNetCore.Extensions
 {
 		public static class AspNetCoreConfigurationExtensions
 		{
+				[Obsolete]
+				// Using IHostingEnvironemtn due to issues with IWebHostEnvironment in extenal classes
 				public static void ConfigureAspNetCoreServices<TDependencyExports>(this IServiceCollection serviceDescriptors,
-						IWebHostEnvironment webHostEnvironment, ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) 
+						IHostingEnvironment hostingEnvironment, ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) 
 						where TDependencyExports : IDependencyExport
 				{
 						var options = configureAspNetCoreServicesOptions ?? new ConfigureAspNetCoreServicesOptions();
 
-						var configuration = GetConfiguration(webHostEnvironment);
-
-						var exportRegistration = new DependencyExportRegistration(configuration, options.InjectKeyVaultSecrets);
+						var exportRegistration = new DependencyExportRegistration(hostingEnvironment, options.InjectKeyVaultSecrets);
 
 						// Internal dependencies
 
-						exportRegistration.RegisterDependencies<AuthenticationDependencyExports>(serviceDescriptors, configuration);
-						exportRegistration.RegisterDependencies<UserManagementDependencyExports>(serviceDescriptors, configuration);
+						exportRegistration.RegisterDependencies<AuthenticationDependencyExports>(serviceDescriptors);
+						exportRegistration.RegisterDependencies<UserManagementDependencyExports>(serviceDescriptors);
 
 						// App defined dependencies
 
-						exportRegistration.RegisterDependencies<TDependencyExports>(serviceDescriptors, configuration);
+						exportRegistration.RegisterDependencies<TDependencyExports>(serviceDescriptors);
 
 						// Swagger dependencies
 
 						serviceDescriptors.AddSwaggerGen();
-				}
-
-				public static IConfiguration GetConfiguration(IWebHostEnvironment hostEnvironment)
-				{
-						var configurationBuilder = new ConfigurationBuilder();
-
-						if (hostEnvironment.IsDevelopment())
-						{
-								configurationBuilder.AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true);
-						}
-						else
-						{
-								configurationBuilder.AddJsonFile("appsettings.json", optional: true);
-						}
-
-						var configuration = configurationBuilder.Build();
-
-						return configuration;
 				}
 		}
 }
