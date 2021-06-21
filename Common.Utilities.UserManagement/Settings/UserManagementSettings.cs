@@ -12,10 +12,13 @@
  * more details.
  */
 
+using Common.Utilities.Configuration.AzureKeyVault.Attributes;
+
 namespace Common.Utilities.UserManagement.Settings
 {
 		public class UserManagementSettings
 		{
+				[AzureKeyVaultSecret]
 				public string SqlConnectionString { get; set; }
 		}
 }
