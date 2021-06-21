@@ -24,8 +24,6 @@ namespace Common.Utilities.AspNetCore.Extensions
 {
 		public static class AspNetCoreConfigurationExtensions
 		{
-				[Obsolete]
-				// Using IHostingEnvironemtn due to issues with IWebHostEnvironment in extenal classes
 				public static void ConfigureAspNetCoreServices<TDependencyExports>(this IServiceCollection serviceDescriptors,
 						IConfiguration configuration, ConfigureAspNetCoreServicesOptions configureAspNetCoreServicesOptions = default) 
 						where TDependencyExports : IDependencyExport
