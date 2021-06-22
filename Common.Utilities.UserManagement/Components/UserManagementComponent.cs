@@ -48,7 +48,7 @@ namespace Common.Utilities.UserManagement.Components
 
 						if (userId == null)
 						{
-								throw new UserException($"User {user} was not found.");
+								throw new UserException($"User {user.Username} was not found.");
 						}
 
 						var dbUser = await _userRepository.GetUser((int)userId);
