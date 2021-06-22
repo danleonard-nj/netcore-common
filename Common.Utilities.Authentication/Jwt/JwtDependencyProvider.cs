@@ -55,7 +55,9 @@ namespace Common.Utilities.Authentication.Jwt
 
 				public IJwtDecoder GetDecoder()
 				{
-						return new JwtDecoder(_jsonSerializer, _urlEncoder);
+						var validator = GetValidator();
+
+						return new JwtDecoder(_jsonSerializer, validator, _urlEncoder, _jwtAlgorithm);
 				}
 
 				public IJwtValidator GetValidator()

@@ -11,9 +11,12 @@
  * for more details.
  */
 
+using Common.Models.Authentication.Jwt;
+using Common.Models.Authentication.User.Abstractions;
 using Common.Utilities.Authentication.Exceptions;
 using Common.Utilities.Authentication.Settings;
 using Common.Utilities.Helpers;
+using Common.Utilities.UserManagement.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IdentityModel.Tokens;
@@ -71,6 +74,31 @@ namespace Common.Utilities.Authentication.Extensions
 						var securityKey = new SymmetricSecurityKey(publicKey);
 
 						return securityKey;
+				}
+
+				public static JwtPayload ToJwtPayload(this IUserModel user, int minutes)
+				{
+						var payload = new JwtPayload
+						{
+								UserId = user.UserId,
+								EmailAddress = user.Email,
+								Username = user.Username,
+								ExpiresOn = DateTimeOffset.UtcNow.AddMinutes(minutes).ToUnixTimeSeconds()
+						};
+
+						return payload;
+				}
+
+				public static IUserModel ToUserModel(this JwtPayload payload)
+				{
+						var user = new UserModel
+						{
+								UserId = payload.UserId,
+								Username = payload.Username,
+								Email = payload.EmailAddress
+						};
+
+						return user;
 				}
 		}
 }

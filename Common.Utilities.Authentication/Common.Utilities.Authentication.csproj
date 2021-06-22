@@ -3,7 +3,7 @@
   <PropertyGroup>
 			<TargetFramework>netcoreapp3.1</TargetFramework>
 			<PackageId>Common.Utilities.Authentication</PackageId>
-			<Version>2.1.1</Version>
+			<Version>2.2.4</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
