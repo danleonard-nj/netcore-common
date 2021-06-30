@@ -11,17 +11,14 @@
  * for more details.
  */
 
-using Common.Utilities.Middleware.ExceptionMiddleware;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
+using Common.Utilities.Middleware.Abstractions;
 
 namespace Common.Utilities.AspNetCore
 {
 		public class AspNetCoreConfigurationOptions
 		{
 				public int TokenLifetime { get; set; } = 60;
-				public IExceptionFilter ExceptionHandler { get; set; }
+				public ICustomMiddleware ExceptionHandler { get; set; }
 				public bool InjectAzureKeyVaultSecrets { get; set; } = false;
 		}
 }

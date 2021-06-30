@@ -17,6 +17,7 @@ using Common.Utilities.DependencyInjection.Registration;
 using Common.Utilities.Jwt;
 using Common.Utilities.Jwt.Configuration;
 using Common.Utilities.Jwt.Dependencies.Exports;
+using Common.Utilities.Middleware.ExceptionHandler;
 using Common.Utilities.Middleware.ExceptionMiddleware;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -39,28 +40,11 @@ namespace Common.Utilities.AspNetCore
 
 						// Add controllers, exception handling
 
-						serviceDescriptors.AddControllers(options =>
-						{
-								options.RegisterExceptionHandler(_aspNetCoreConfigurationOptions);
-						});
-
 						serviceDescriptors.RegisterDependencies<TDependencyExports>(managedConfiguration, _jwtOptions);
 
 						// Swagger dependencies
 
 						serviceDescriptors.AddSwaggerGen();
-				}
-
-				public static void RegisterExceptionHandler(this MvcOptions mvcOptions, AspNetCoreConfigurationOptions netCoreOptions)
-				{
-						if (netCoreOptions.ExceptionHandler != null)
-						{
-								mvcOptions.Filters.Add(netCoreOptions.ExceptionHandler);
-						}
-						else
-						{
-								mvcOptions.Filters.Add<CommonExceptionHandler>();
-						}
 				}
 
 				public static void RegisterDependencies<T>(this IServiceCollection serviceDescriptors,
