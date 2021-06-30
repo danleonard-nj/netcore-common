@@ -17,10 +17,7 @@ using Common.Utilities.DependencyInjection.Registration;
 using Common.Utilities.Jwt;
 using Common.Utilities.Jwt.Configuration;
 using Common.Utilities.Jwt.Dependencies.Exports;
-using Common.Utilities.Middleware.ExceptionHandler;
-using Common.Utilities.Middleware.ExceptionMiddleware;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Common.Utilities.AspNetCore
