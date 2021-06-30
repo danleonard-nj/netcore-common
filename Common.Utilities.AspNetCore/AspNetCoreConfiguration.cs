@@ -19,6 +19,7 @@ using Common.Utilities.Jwt.Configuration;
 using Common.Utilities.Jwt.Dependencies.Exports;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace Common.Utilities.AspNetCore
 {
@@ -35,13 +36,20 @@ namespace Common.Utilities.AspNetCore
 						var managedConfiguration = new ManagedConfiguration(hostEnvironment,
 								_aspNetCoreConfigurationOptions.InjectAzureKeyVaultSecrets);
 
+						serviceDescriptors.AddControllers();
+
+						serviceDescriptors.AddSwaggerGen(c =>
+						{
+								c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+						});
+
 						// Add controllers, exception handling
 
 						serviceDescriptors.RegisterDependencies<TDependencyExports>(managedConfiguration, _jwtOptions);
 
 						// Swagger dependencies
 
-						serviceDescriptors.AddSwaggerGen();
+
 				}
 
 				public static void RegisterDependencies<T>(this IServiceCollection serviceDescriptors,
