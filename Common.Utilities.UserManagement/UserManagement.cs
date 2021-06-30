@@ -19,7 +19,7 @@ using Common.Utilities.Jwt;
 using System;
 using System.Threading.Tasks;
 
-namespace Common.Utilities.UserManagement
+namespace Common.Utilities.UserManagement.Abstractions
 {
 		public interface IUserManagement
 		{
@@ -33,9 +33,9 @@ namespace Common.Utilities.UserManagement
 				Task<bool> VerifyHashedPassword(string source, string compare, string salt);
 		}
 
-		public abstract class UserManagement : IUserManagement 
+		public abstract class UserManagementBase : IUserManagement 
 		{
-				protected UserManagement(IJwtTokenProvider jwtTokenProvider,
+				protected UserManagementBase(IJwtTokenProvider jwtTokenProvider,
 						ICryptoUtility cryptoUtility)
 				{
 						_jwtTokenProvider = jwtTokenProvider ?? throw new ArgumentNullException(nameof(jwtTokenProvider));
