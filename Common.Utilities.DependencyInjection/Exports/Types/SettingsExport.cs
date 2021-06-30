@@ -21,12 +21,12 @@ namespace Common.Utilities.DependencyInjection.Exports.Types
 				string TypeName { get; }
 		}
 
-		public class Settings : ISettingsExport
+		public class SettingsExport : ISettingsExport
 		{
 				public Type Type { get => _type; }
 				public string TypeName { get => _type.Name; }
 
-				public Settings(Type type)
+				public SettingsExport(Type type)
 				{
 						_type = type;
 				}

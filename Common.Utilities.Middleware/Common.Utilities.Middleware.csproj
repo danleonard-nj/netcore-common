@@ -3,20 +3,22 @@
   <PropertyGroup>
 			<TargetFramework>netcoreapp3.1</TargetFramework>
 			<PackageId>Common.Utilities.Middleware</PackageId>
-			<Version>2.0.1</Version>
+			<Version>3.0.0</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Models.AspNetCore\Common.Models.AspNetCore.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Authentication\Common.Utilities.Authentication.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Exceptions\Common.Utilities.Exceptions.csproj" />
   </ItemGroup>
 
 </Project>

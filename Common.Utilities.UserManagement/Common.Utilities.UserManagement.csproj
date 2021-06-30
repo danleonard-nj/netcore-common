@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 			<PackageId>Common.Utilities.UserManagement</PackageId>
-			<Version>2.0.2</Version>
+			<Version>3.2.2</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -14,10 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common.Models.Authentication\Common.Models.Authentication.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Authentication\Common.Utilities.Authentication.csproj" />
+    <ProjectReference Include="..\Common.Models.UserManagement\Common.Models.UserManagement.csproj" />
     <ProjectReference Include="..\Common.Utilities.Cryptography\Common.Utilities.Cryptography.csproj" />
     <ProjectReference Include="..\Common.Utilities.DependencyInjection\Common.Utilities.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Jwt\Common.Utilities.Jwt.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@
   <PropertyGroup>
 			<TargetFramework>netcoreapp3.1</TargetFramework>
 			<PackageId>Common.Utilities.DependencyInjection</PackageId>
-			<Version>2.2.2</Version>
+			<Version>3.0.2</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

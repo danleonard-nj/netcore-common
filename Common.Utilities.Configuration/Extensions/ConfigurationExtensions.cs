@@ -13,7 +13,6 @@
 
 
 using Microsoft.Extensions.Configuration;
-using System.Linq;
 
 namespace Common.Utilities.Configuration.Extensions
 {

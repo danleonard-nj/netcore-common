@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+			<TargetFramework>netcoreapp3.1</TargetFramework>
+			<PackageId>Common.Models.Jwt</PackageId>
+			<Version>1.0.0</Version>
+			<Authors>Dan Leonard</Authors>
+			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Models.AspNetCore\Common.Models.AspNetCore.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Configuration.AzureKeyVault\Common.Utilities.Configuration.AzureKeyVault.csproj" />
+  </ItemGroup>
+
+</Project>

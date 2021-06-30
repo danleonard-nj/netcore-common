@@ -18,64 +18,73 @@ using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Common.Utilities.DependencyInjection.Registration
 {
-		public class DependencyExportRegistration
+		public interface IDependencyExportRegistration
 		{
-				public DependencyExportRegistration(IManagedConfiguration managedConfiguration)
-				{
-						if (managedConfiguration == null)
-						{
-								throw new ArgumentNullException(nameof(managedConfiguration));
-						}
+				void RegisterDependencies<T>() where T : IDependencyExport;
+				void RegisterDependency(IServiceExport serviceExport);
+				void RegisterDependency<TServiceType, TImplementationType>(Func<ServiceProvider, TImplementationType> implementationFactory);
+				object ResolveDependency(Type serviceType);
+				T ResolveDependency<T>();
+		}
 
-						_binder = new Binder(managedConfiguration);
+		public class DependencyExportRegistration : IDependencyExportRegistration
+		{
+				public DependencyExportRegistration(IServiceCollection serviceDescriptors,
+						IManagedConfiguration managedConfiguration)
+				{
+						_configurationBinder = new ConfigurationBinder(managedConfiguration);
+						_serviceDescriptors = serviceDescriptors ?? throw new ArgumentNullException(nameof(serviceDescriptors));
 				}
 
-				public void RegisterDependencies<T>(IServiceCollection serviceDescriptors)
-						where T : IDependencyExport
+				public T ResolveDependency<T>()
 				{
-						var exports = CreateDependencyExportInstance<T>();
-
-						var settingsExports = exports.GetSettingsExports();
-
-						RegisterSettingsExports(settingsExports, serviceDescriptors);
-
-						var serviceExports = exports.GetServiceExports();
-
-						RegisterServiceExports(serviceExports, serviceDescriptors);
-				}
-				
-				private void RegisterServiceExports(IEnumerable<IServiceExport> serviceExports,
-						IServiceCollection serviceDescriptors)
-				{
-						var exportList = serviceExports.ToList();
-
-						exportList.ForEach(x => x.RegisterServiceExport(serviceDescriptors));
-				}
-
-				private void RegisterSettingsExports(IEnumerable<ISettingsExport> settingsExports,
-						IServiceCollection serviceDescriptors)
-				{
-						foreach (var settingsExport in settingsExports)
-						{
-								var instance = _binder.BindConfiguration(settingsExport.Type);
-
-								serviceDescriptors.AddSingleton(settingsExport.Type, instance);
-						}
-				}
-
-				private T CreateDependencyExportInstance<T>()
-				{
-						var instance = Activator.CreateInstance<T>();
+						var instance = _serviceDescriptors.ResolveDependency<T>();
 
 						return instance;
 				}
 
-				private readonly IBinder _binder;
-				private readonly IManagedConfiguration _managedConfiguration;
+				public object ResolveDependency(Type serviceType)
+				{
+						var instance = _serviceDescriptors.ResolveDependency(serviceType);
+
+						return instance;
+				}
+
+				public void RegisterDependencies<T>() where T : IDependencyExport
+				{
+						var exports = Activator.CreateInstance<T>();
+
+						foreach (var settingsExport in exports.GetSettingsExports())
+						{
+								_serviceDescriptors.RegisterSettingsExport(settingsExport, _configurationBinder);
+						}
+
+						foreach (var serviceExport in exports.GetServiceExports())
+						{
+								_serviceDescriptors.RegisterServiceExport(serviceExport);
+						}
+				}
+
+				public void RegisterDependency<TServiceType, TImplementationType>(Func<ServiceProvider, TImplementationType> implementationFactory)
+				{
+						var serviceProvider = _serviceDescriptors.BuildServiceProvider();
+
+						var instance = implementationFactory(serviceProvider);
+
+						var serviceExport = new ServiceExport<TServiceType, TImplementationType>(instance);
+
+						_serviceDescriptors.RegisterServiceExport(serviceExport);
+				}
+
+				public void RegisterDependency(IServiceExport serviceExport)
+				{
+						_serviceDescriptors.RegisterServiceExport(serviceExport);
+				}
+
+				private readonly IConfigurationBinder _configurationBinder;
+				private readonly IServiceCollection _serviceDescriptors;
 		}
 }

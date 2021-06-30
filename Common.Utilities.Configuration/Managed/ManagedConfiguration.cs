@@ -16,7 +16,6 @@ using Azure.Extensions.AspNetCore.Configuration.Secrets;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Common.Models.Configuration.Settings;
-using Common.Utilities.Exceptions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -28,9 +27,8 @@ namespace Common.Utilities.Configuration.Managed
 		{
 				bool IsKeyVault { get; }
 
-				void BuildAzureKeyVaultConfiguration();
-				void BuildDefaultConfiguration();
-				IConfiguration GetConfiguration();
+				IConfiguration BuildAzureKeyVaultConfiguration();
+				IConfiguration BuildDefaultConfiguration();
 		}
 
 		public class ManagedConfiguration : IManagedConfiguration
@@ -41,25 +39,13 @@ namespace Common.Utilities.Configuration.Managed
 				{
 						_hostEnvironment = hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
 
-						_configuration = default;
-
-						if (!_hostEnvironment.IsDevelopment() || injectKeyVaultSecrets)
+						if (injectKeyVaultSecrets)
 						{
 								IsKeyVault = true;
 						}
 				}
 
-				public IConfiguration GetConfiguration()
-				{
-						if (_configuration == default)
-						{
-								throw new ManagedConfigurationException("Configuration must be built before it can be retrieved.");
-						}
-
-						return _configuration;
-				}
-
-				public void BuildAzureKeyVaultConfiguration()
+				public IConfiguration BuildAzureKeyVaultConfiguration()
 				{
 						var builder = new ConfigurationBuilder();
 
@@ -69,10 +55,10 @@ namespace Common.Utilities.Configuration.Managed
 
 						builder.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
 
-						_configuration = builder.Build();
+						return builder.Build();
 				}
 
-				public void BuildDefaultConfiguration()
+				public IConfiguration BuildDefaultConfiguration()
 				{
 						var builder = new ConfigurationBuilder();
 
@@ -80,7 +66,7 @@ namespace Common.Utilities.Configuration.Managed
 
 						builder.AddJsonFile(GetJsonConfigurationName(_hostEnvironment));
 
-						_configuration = builder.Build();
+						return builder.Build();
 				}
 
 				private string GetJsonConfigurationName(IHostEnvironment hostEnvironment)
@@ -90,17 +76,14 @@ namespace Common.Utilities.Configuration.Managed
 
 				private string GetAzureKeyVaultUri(IHostEnvironment hostEnvironment)
 				{
-						var configuration = new ConfigurationBuilder()
-								.AddJsonFile(GetJsonConfigurationName(hostEnvironment))
-								.Build();
+						var defaultConfiguration = BuildDefaultConfiguration();
 
 						var keyVaultSettings = Activator.CreateInstance<AzureKeyVaultConfigurationSettings>();
-						configuration.GetSection(typeof(AzureKeyVaultConfigurationSettings).Name).Bind(keyVaultSettings);
+						defaultConfiguration.GetSection(typeof(AzureKeyVaultConfigurationSettings).Name).Bind(keyVaultSettings);
 
 						return keyVaultSettings?.AzureKeyVaultUri;
 				}
 
 				private readonly IHostEnvironment _hostEnvironment;
-				private IConfiguration _configuration;
 		}
 }

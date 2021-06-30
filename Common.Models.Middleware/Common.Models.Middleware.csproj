@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Models.AspNetCore\Common.Models.AspNetCore.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Jwt\Common.Utilities.Jwt.csproj" />
   </ItemGroup>
 
 </Project>

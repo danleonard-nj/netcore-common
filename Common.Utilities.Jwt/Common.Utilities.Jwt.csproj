@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+			<TargetFramework>netcoreapp3.1</TargetFramework>
+			<PackageId>Common.Utilities.Jwt</PackageId>
+			<Version>1.2.7</Version>
+			<Authors>Dan Leonard</Authors>
+			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JWT" Version="8.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Models.Jwt\Common.Models.Jwt.csproj" />
+    <ProjectReference Include="..\Common.Utilities.DependencyInjection\Common.Utilities.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Middleware\Common.Utilities.Middleware.csproj" />
+  </ItemGroup>
+
+</Project>

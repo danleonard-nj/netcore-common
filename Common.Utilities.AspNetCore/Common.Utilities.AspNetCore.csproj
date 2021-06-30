@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 			<PackageId>Common.Utilities.AspNetCore</PackageId>
-			<Version>2.4.9</Version>
+			<Version>3.3.1</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
@@ -15,9 +15,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Models.AspNetCore\Common.Models.AspNetCore.csproj" />
-    <ProjectReference Include="..\Common.Models.Authentication\Common.Models.Authentication.csproj" />
+    <ProjectReference Include="..\Common.Models.Configuration\Common.Models.Configuration.csproj" />
+    <ProjectReference Include="..\Common.Models.Jwt\Common.Models.Jwt.csproj" />
     <ProjectReference Include="..\Common.Models.Middleware\Common.Models.Middleware.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Authentication\Common.Utilities.Authentication.csproj" />
+    <ProjectReference Include="..\Common.Models.UserManagement\Common.Models.UserManagement.csproj" />
     <ProjectReference Include="..\Common.Utilities.Collections\Common.Utilities.Collections.csproj" />
     <ProjectReference Include="..\Common.Utilities.Configuration.AzureKeyVault\Common.Utilities.Configuration.AzureKeyVault.csproj" />
     <ProjectReference Include="..\Common.Utilities.Configuration\Common.Utilities.Configuration.csproj" />
@@ -27,6 +28,7 @@
     <ProjectReference Include="..\Common.Utilities.Exceptions\Common.Utilities.Exceptions.csproj" />
     <ProjectReference Include="..\Common.Utilities.Extensions\Common.Utilities.Extensions.csproj" />
     <ProjectReference Include="..\Common.Utilities.Helpers\Common.Utilities.Helpers.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Jwt\Common.Utilities.Jwt.csproj" />
     <ProjectReference Include="..\Common.Utilities.Logging\Common.Utilities.Logging.csproj" />
     <ProjectReference Include="..\Common.Utilities.Middleware\Common.Utilities.Middleware.csproj" />
     <ProjectReference Include="..\Common.Utilities.Reflection\Common.Utilities.Reflection.csproj" />
