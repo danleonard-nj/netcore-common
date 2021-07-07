@@ -11,7 +11,6 @@
  * for more details.
  */
 
-using Common.Utilities.Extensions;
 using Common.Utilities.Extensions.Collections;
 using Common.Utilities.UnitTesting.Attributes;
 using Common.Utilities.UnitTesting.Extensions;

@@ -12,7 +12,7 @@
  */
 
 
-namespace Common.Utilities.Middleware.ExceptionMiddleware.Models
+namespace Common.Utilities.Middleware.Exceptions.Models
 {
 		public class ExceptionResponseModel
 		{

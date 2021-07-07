@@ -13,14 +13,15 @@
 
 
 using Common.Utilities.Extensions.Base;
-using Common.Utilities.Middleware.ExceptionMiddleware.Models;
+using Common.Utilities.Middleware.Exceptions.Abstractions;
+using Common.Utilities.Middleware.Exceptions.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Common.Utilities.Middleware.ExceptionHandler
+namespace Common.Utilities.Middleware.Exceptions
 {
 		public class CommonExceptionHandler : ExceptionHandlerMiddleware
 		{

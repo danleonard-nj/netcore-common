@@ -16,12 +16,11 @@ using Common.Utilities.Extensions.Base;
 using Common.Utilities.Middleware.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
-namespace Common.Utilities.Middleware.ExceptionHandler
+namespace Common.Utilities.Middleware.Exceptions.Abstractions
 {
 		public abstract class ExceptionHandlerMiddleware : ICustomMiddleware
 		{
@@ -52,7 +51,7 @@ namespace Common.Utilities.Middleware.ExceptionHandler
 
 				protected async Task WriteResponse(ObjectResult result)
 				{
-						var responseJson = JsonConvert.SerializeObject(result);
+						var responseJson = JsonConvert.SerializeObject(result.Value);
 						Context.Response.ContentType = "application/json";
 						Context.Response.StatusCode = (int)result.StatusCode;
 
