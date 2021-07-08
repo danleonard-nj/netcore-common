@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.Models.Jwt\Common.Models.Jwt.csproj" />
     <ProjectReference Include="..\Common.Models.UserManagement\Common.Models.UserManagement.csproj" />
     <ProjectReference Include="..\Common.Utilities.Cryptography\Common.Utilities.Cryptography.csproj" />
     <ProjectReference Include="..\Common.Utilities.DependencyInjection\Common.Utilities.DependencyInjection.csproj" />
