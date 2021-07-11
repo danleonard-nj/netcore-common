@@ -63,6 +63,8 @@ namespace Common.Utilities.AspNetCore
 						exportRegistration.RegisterDependencies<T>();
 				}
 
+				// Include option to exclude JWT auth
+
 				public static void RegisterJwtAuthentication(this DependencyExportRegistration exportRegistration,
 						JwtTokenProviderOptions jwtOptions)
 				{

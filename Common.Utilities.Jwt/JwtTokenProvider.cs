@@ -96,12 +96,14 @@ namespace Common.Utilities.Jwt
 
 						try
 						{
+								_options.TokenValidationParameters.ValidateIssuerSigningKey = false;
+
 								_securityTokenValidator.ValidateToken(token, validationParameters, out var validatedToken);
 
 								return true;
 						}
 
-						catch (Exception)
+						catch (Exception ex)
 						{
 								throw new InvalidTokenException<JwtTokenProvider>(Caller.GetMethodName());
 						}
