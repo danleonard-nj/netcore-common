@@ -53,8 +53,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.Jwt", "Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Models.Jwt", "Common.Models.Jwt\Common.Models.Jwt.csproj", "{D4A7E4FF-4CB7-4AA4-86BE-7DF73B2555DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Utilities.TestApp", "Common.Utilities.TestApp\Common.Utilities.TestApp.csproj", "{382BC6A2-C2C3-4D7C-9729-9AE14372385F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Models.UserManagement", "Common.Models.UserManagement\Common.Models.UserManagement.csproj", "{D4DAF360-2B61-4DC8-B1B0-CD9B611F9997}"
 EndProject
 Global
@@ -159,10 +157,6 @@ Global
 		{D4A7E4FF-4CB7-4AA4-86BE-7DF73B2555DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A7E4FF-4CB7-4AA4-86BE-7DF73B2555DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A7E4FF-4CB7-4AA4-86BE-7DF73B2555DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{382BC6A2-C2C3-4D7C-9729-9AE14372385F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{382BC6A2-C2C3-4D7C-9729-9AE14372385F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{382BC6A2-C2C3-4D7C-9729-9AE14372385F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{382BC6A2-C2C3-4D7C-9729-9AE14372385F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4DAF360-2B61-4DC8-B1B0-CD9B611F9997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4DAF360-2B61-4DC8-B1B0-CD9B611F9997}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4DAF360-2B61-4DC8-B1B0-CD9B611F9997}.Release|Any CPU.ActiveCfg = Release|Any CPU
