@@ -61,7 +61,7 @@ namespace Common.Utilities.Configuration.Binding
 
 						var serviceConfiguration = _defaultConfiguration.GetServiceConfiguration();
 
-						if (keyVaultUri != default)
+						if ((keyVaultUri ?? serviceConfiguration?.AzureKeyVaultUri) != default)
 						{
 								_useKeyvault = serviceConfiguration?.InjectAzureKeyVaultSecrets ?? false;
 								_keyVaultUri = serviceConfiguration?.AzureKeyVaultUri ?? keyVaultUri;

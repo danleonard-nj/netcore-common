@@ -37,7 +37,7 @@ namespace Common.Utilities.Jwt
 				private readonly TokenValidationParameters _defaultValidationParameters =
 						new TokenValidationParameters
 						{
-								ValidateIssuerSigningKey = false,
+								ValidateIssuerSigningKey = true,
 								ValidateIssuer = false,
 								ValidateAudience = false,
 								ClockSkew = TimeSpan.Zero

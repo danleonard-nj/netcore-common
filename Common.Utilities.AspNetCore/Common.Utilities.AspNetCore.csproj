@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 			<PackageId>Common.Utilities.AspNetCore</PackageId>
-			<Version>2.0.0</Version>
+			<Version>2.0.1</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Common.Utilities.DependencyInjection\Common.Utilities.DependencyInjection.csproj" />
     <ProjectReference Include="..\Common.Utilities.Extensions\Common.Utilities.Extensions.csproj" />
     <ProjectReference Include="..\Common.Utilities.Helpers\Common.Utilities.Helpers.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Jwt\Common.Utilities.Jwt.csproj" />
     <ProjectReference Include="..\Common.Utilities.Logging\Common.Utilities.Logging.csproj" />
     <ProjectReference Include="..\Common.Utilities.Middleware\Common.Utilities.Middleware.csproj" />
     <ProjectReference Include="..\Common.Utilities.Swagger\Common.Utilities.Swagger.csproj" />

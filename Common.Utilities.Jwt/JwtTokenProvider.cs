@@ -65,6 +65,7 @@ namespace Common.Utilities.Jwt
 						}
 
 						_publicKey = publicKey.Encode();
+						_jwtTokenProviderOptions.TokenValidationParameters.IssuerSigningKey = new SymmetricSecurityKey(_publicKey);
 
 						// Coalesce token lifetime configuration values, default to 60;
 
@@ -112,9 +113,10 @@ namespace Common.Utilities.Jwt
 
 						var validationParameters = _jwtTokenProviderOptions.TokenValidationParameters;
 
+
 						try
 						{
-								_jwtTokenProviderOptions.TokenValidationParameters.ValidateIssuerSigningKey = false;
+								validationParameters.IssuerSigningKey = new SymmetricSecurityKey(_publicKey);
 
 								_securityTokenValidator.ValidateToken(
 										token, validationParameters, out var validatedToken);
@@ -122,7 +124,7 @@ namespace Common.Utilities.Jwt
 								return true;
 						}
 
-						catch (Exception)
+						catch (Exception ex)
 						{
 								throw new AuthenticationException($"{Caller.GetMethodName()}: Failed to validate Bearer token.");
 						}
