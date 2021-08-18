@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,7 +12,6 @@
  */
 
 
-using Common.Utilities.Jwt.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System;
 
@@ -21,33 +20,27 @@ namespace Common.Utilities.Jwt
 		public class JwtTokenProviderOptions
 		{
 				public int TokenLifetime { get; set; } = 5;
-				public bool IsSecurityKeySet { get => SecurityKey != default; }
-				public string SecurityKey { get; set; }
+				public string PublicKey { get; set; }
+				public TokenValidationParameters TokenValidationParameters { get; private set; }
 
-				public TokenValidationParameters TokenValidationParameters { get; set; }
-
-				public JwtTokenProviderOptions()
+				public JwtTokenProviderOptions(TokenValidationParameters validationParameters = default)
 				{
-						if (TokenValidationParameters == null)
+						TokenValidationParameters = validationParameters ?? _defaultValidationParameters;
+				}
+
+				//public void SetSecurityKey(string key)
+				//{
+				//		var securityKey = new SymmetricSecurityKey(key.Encode());
+				//		TokenValidationParameters.IssuerSigningKey = securityKey;
+				//}
+
+				private readonly TokenValidationParameters _defaultValidationParameters =
+						new TokenValidationParameters
 						{
-								TokenValidationParameters = _defaultValidationParameters;
-						}
-				}
-
-				public void SetSecurityKey(string key)
-				{
-						var securityKey = new SymmetricSecurityKey(key.Encode());
-
-						TokenValidationParameters.IssuerSigningKey = securityKey;
-						SecurityKey = key;
-				}
-
-				private readonly TokenValidationParameters _defaultValidationParameters = new TokenValidationParameters
-				{
-						ValidateIssuerSigningKey = false,
-						ValidateIssuer = false,
-						ValidateAudience = false,
-						ClockSkew = TimeSpan.Zero
-				};
+								ValidateIssuerSigningKey = false,
+								ValidateIssuer = false,
+								ValidateAudience = false,
+								ClockSkew = TimeSpan.Zero
+						};
 		}
 }

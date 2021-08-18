@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,15 +12,53 @@
  */
 
 
+using Common.Models.Configuration.Settings;
+using Common.Utilities.Configuration.Attributes;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Common.Utilities.Configuration.Extensions
 {
 		public static class ConfigurationExtensions
 		{
-				public static T GetInstance<T>(this IConfiguration configuration)
+				public static bool KeyVaultAttributesDefined(this object instance)
 				{
-						var instance = configuration.GetSection(typeof(T).Name).Get<T>();
+						var secretAttributesDefined = instance
+								.GetType()
+								.GetProperties()
+								.Any(property => Attribute.IsDefined(property, typeof(AzureKeyVaultSecretAttribute)));
+
+						return secretAttributesDefined;
+				}
+
+				public static void InjectKeyVaultSecrets(this object instance, Dictionary<string, string> keyVault)
+				{
+						var properties = instance
+								.GetType()
+								.GetProperties();
+
+						foreach (var property in properties)
+						{
+								if (Attribute.IsDefined(property, typeof(AzureKeyVaultSecretAttribute)))
+								{
+										var secretKey = property.Name;
+
+										if (keyVault.ContainsKey(secretKey))
+										{
+												var secretValue = keyVault.GetValueOrDefault(secretKey);
+
+												property.SetValue(instance, secretValue);
+										}
+								}
+						}
+				}
+
+				public static ServiceConfigurationSettings GetServiceConfiguration(this IConfiguration configuration)
+				{
+						var instance = Activator.CreateInstance<ServiceConfigurationSettings>();
+						configuration.GetSection(typeof(ServiceConfigurationSettings).Name).Bind(instance);
 
 						return instance;
 				}

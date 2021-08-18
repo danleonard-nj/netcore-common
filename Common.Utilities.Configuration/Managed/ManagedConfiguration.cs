@@ -25,24 +25,23 @@ namespace Common.Utilities.Configuration.Managed
 {
 		public interface IManagedConfiguration
 		{
-				bool IsKeyVault { get; }
+				public bool InjectKeyVaultSecrets { get; set; }
 
 				IConfiguration BuildAzureKeyVaultConfiguration();
 				IConfiguration BuildDefaultConfiguration();
 		}
 
-		public class ManagedConfiguration : IManagedConfiguration
+		public class ManagedConfiguration
 		{
-				public bool IsKeyVault { get; private set; }
+				public bool InjectKeyVaultSecrets { get; set; }
+				public bool IsDevelopment { get; }
 
-				public ManagedConfiguration(IHostEnvironment hostEnvironment, bool injectKeyVaultSecrets = false)
+				// Handle the environment from here, assume it's development unless otherwise specified and
+				// fetch appsettings.Development.json
+
+				public ManagedConfiguration(bool isDevelopment = true)
 				{
-						_hostEnvironment = hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
-
-						if (injectKeyVaultSecrets)
-						{
-								IsKeyVault = true;
-						}
+						IsDevelopment = isDevelopment;
 				}
 
 				public IConfiguration BuildAzureKeyVaultConfiguration()

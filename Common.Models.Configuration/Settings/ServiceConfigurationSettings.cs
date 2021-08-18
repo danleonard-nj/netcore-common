@@ -12,25 +12,12 @@
  */
 
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-
-namespace Common.Utilities.AspNetCore.Response.Extensions
+namespace Common.Models.Configuration.Settings
 {
-		public static class AspNetCoreResponseExtensions
+		public class ServiceConfigurationSettings
 		{
-				public static IActionResult ToResponse(this object obj)
-				{
-						var response = new ObjectResult(obj);
+				public string AzureKeyVaultUri { get; set; }
+				public bool InjectAzureKeyVaultSecrets { get; set; } = false;
 
-						return response;
-				}
-
-				public static T GetInstance<T>(this IConfiguration configuration)
-				{
-						var instance = configuration.GetSection(typeof(T).Name).Get<T>();
-
-						return instance;
-				}
 		}
 }

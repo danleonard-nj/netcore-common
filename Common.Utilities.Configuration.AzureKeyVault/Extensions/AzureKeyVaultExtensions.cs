@@ -21,41 +21,14 @@ namespace Common.Utilities.Configuration.AzureKeyVault.Extensions
 {
 		public static class AzureKeyVaultExtensions
 		{
-				public static void InjectKeyVaultValues(this object instance, IConfiguration configuration)
-				{
-						if (instance.KeyVaultAttributesDefined())
-						{
-								var properties = instance.GetType().GetProperties();
+				//public static bool KeyVaultAttributesDefined(this object instance)
+				//{
+				//		var secretAttributesDefined = instance
+				//				.GetType()
+				//				.GetProperties()
+				//				.Any(property => Attribute.IsDefined(property, typeof(AzureKeyVaultSecretAttribute)));
 
-								var keys = configuration
-										.AsEnumerable()
-										.Select(x => x.Key);
-
-								foreach (var property in properties)
-								{
-										if (Attribute.IsDefined(property, typeof(AzureKeyVaultSecretAttribute)))
-										{
-												var secretKey = property.GetValue(instance).ToString();
-
-												if (keys.Contains(secretKey))
-												{
-														var secret = configuration[secretKey];
-
-														property.SetValue(instance, secret);
-												}
-										}
-								}
-						}
-				}
-
-				public static bool KeyVaultAttributesDefined(this object instance)
-				{
-						var secretAttributesDefined = instance
-								.GetType()
-								.GetProperties()
-								.Any(property => Attribute.IsDefined(property, typeof(AzureKeyVaultSecretAttribute)));
-
-						return secretAttributesDefined;
-				}
+				//		return secretAttributesDefined;
+				//}
 		}
 }

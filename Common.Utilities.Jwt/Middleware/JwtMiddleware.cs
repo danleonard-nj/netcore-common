@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,14 +12,13 @@
  */
 
 
-
-using Common.Utilities.Exceptions.Authentication;
 using Common.Utilities.Helpers;
 using Common.Utilities.Jwt.Extensions;
 using Common.Utilities.Jwt.Middleware.Attributes;
 using Common.Utilities.Middleware.Abstractions;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 
 namespace Common.Utilities.Jwt.Middleware
@@ -42,14 +41,14 @@ namespace Common.Utilities.Jwt.Middleware
 
 								if (token == null)
 								{
-										throw new NullTokenException<JwtMiddleware>(Caller.GetMethodName());
+										throw new AuthenticationException($"{Caller.GetMethodName()}: No Bearer supplied in request.");
 								}
 
 								var isAuthenticated = await VerifyToken(token);
 
 								if (!isAuthenticated)
 								{
-										throw new InvalidTokenException<JwtMiddleware>(Caller.GetMethodName());
+										throw new AuthenticationException($"{Caller.GetMethodName()}: Invalid Bearer token.");
 								}
 						}
 

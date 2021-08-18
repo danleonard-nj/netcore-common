@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,10 +12,11 @@
  */
 
 
-namespace Common.Models.Configuration.Settings
+using System;
+
+namespace Common.Utilities.Configuration.Attributes
 {
-		public class AzureKeyVaultConfigurationSettings
+		public class AzureKeyVaultSecretAttribute : Attribute
 		{
-				public string AzureKeyVaultUri { get; set; }
 		}
 }

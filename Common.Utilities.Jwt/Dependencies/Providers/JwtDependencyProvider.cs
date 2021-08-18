@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,6 +12,7 @@
  */
 
 
+using Common.Models.Jwt.Settings;
 using Common.Utilities.Jwt.Encryption;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -22,6 +23,8 @@ namespace Common.Utilities.Jwt.Dependencies.Providers
 		{
 				IJwtTokenDecoder GetDecoder();
 				IJwtTokenEncoder GetEncoder();
+				JwtAuthenticationSettings GetJwtAuthenticationSettings();
+				JwtTokenProviderOptions GetJwtTokenProviderOptions();
 				ISecurityTokenValidator GetSecurityTokenValidator();
 		}
 
@@ -29,11 +32,15 @@ namespace Common.Utilities.Jwt.Dependencies.Providers
 		{
 				public JwtDependencyProvider(IJwtTokenDecoder jwtTokenDecoder,
 						IJwtTokenEncoder jwtTokenEncoder,
-						ISecurityTokenValidator securityTokenValidator)
+						ISecurityTokenValidator securityTokenValidator,
+						JwtAuthenticationSettings jwtAuthenticationSettings,
+						JwtTokenProviderOptions jwtTokenProviderOptions)
 				{
 						_securityTokenValidator = securityTokenValidator ?? throw new ArgumentNullException(nameof(securityTokenValidator));
 						_jwtTokenDecoder = jwtTokenDecoder ?? throw new ArgumentNullException(nameof(jwtTokenDecoder));
 						_jwtTokenEncoder = jwtTokenEncoder ?? throw new ArgumentNullException(nameof(jwtTokenEncoder));
+						_jwtTokenProviderOptions = jwtTokenProviderOptions ?? throw new ArgumentNullException(nameof(jwtTokenProviderOptions));
+						_jwtAuthenticationSettings = jwtAuthenticationSettings ?? throw new ArgumentNullException(nameof(jwtAuthenticationSettings));
 				}
 
 				public IJwtTokenEncoder GetEncoder()
@@ -51,8 +58,20 @@ namespace Common.Utilities.Jwt.Dependencies.Providers
 						return _securityTokenValidator;
 				}
 
+				public JwtTokenProviderOptions GetJwtTokenProviderOptions()
+				{
+						return _jwtTokenProviderOptions;
+				}
+
+				public JwtAuthenticationSettings GetJwtAuthenticationSettings()
+				{
+						return _jwtAuthenticationSettings;
+				}
+
 				private readonly ISecurityTokenValidator _securityTokenValidator;
 				private readonly IJwtTokenEncoder _jwtTokenEncoder;
 				private readonly IJwtTokenDecoder _jwtTokenDecoder;
+				private readonly JwtAuthenticationSettings _jwtAuthenticationSettings;
+				private readonly JwtTokenProviderOptions _jwtTokenProviderOptions;
 		}
 }

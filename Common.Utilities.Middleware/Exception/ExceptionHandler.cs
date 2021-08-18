@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -12,20 +12,18 @@
  */
 
 
-using Common.Utilities.Extensions.Base;
 using Common.Utilities.Middleware.Exceptions.Abstractions;
 using Common.Utilities.Middleware.Exceptions.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Common.Utilities.Middleware.Exceptions
 {
-		public class CommonExceptionHandler : ExceptionHandlerMiddleware
+		public class ExceptionHandler : ExceptionHandlerMiddleware
 		{
-				public CommonExceptionHandler(RequestDelegate requestDelegate)
+				public ExceptionHandler(RequestDelegate requestDelegate)
 						: base(requestDelegate)
 				{
 				}
@@ -34,12 +32,6 @@ namespace Common.Utilities.Middleware.Exceptions
 				{
 						await Task.Yield();
 
-						var statusCode = HttpStatusCode.InternalServerError;
-
-						if (exception is CommonException commonException)
-						{
-								statusCode = commonException.StatusCode;
-						}
 						var exceptionModel = new ExceptionResponseModel
 						{
 								IsError = true,
@@ -49,7 +41,7 @@ namespace Common.Utilities.Middleware.Exceptions
 
 						var response = new ObjectResult(exceptionModel)
 						{
-								StatusCode = (int)statusCode
+								StatusCode = Context.Response.StatusCode
 						};
 
 						return response;

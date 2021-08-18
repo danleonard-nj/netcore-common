@@ -1,18 +1,18 @@
 ﻿/* Copyright (C) 2021 Dan Leonard
  * 
- * This  is free software: you can redistribute it and/or modify it under 
+ * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
  * Software Foundation, either version 3 of the License, or (at your option) 
  * any later version.
  * 
  * This software is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License 
  * for more details.
  */
 
+
 using Common.Utilities.Configuration.Binding;
-using Common.Utilities.Configuration.Managed;
 using Common.Utilities.DependencyInjection.Exports.Types;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Extensions;
@@ -33,10 +33,10 @@ namespace Common.Utilities.DependencyInjection.Registration
 		public class DependencyExportRegistration : IDependencyExportRegistration
 		{
 				public DependencyExportRegistration(IServiceCollection serviceDescriptors,
-						IManagedConfiguration managedConfiguration)
+						IConsolidatedConfigurationProvider consolidatedConfigurationProvider)
 				{
-						_configurationBinder = new ConfigurationBinder(managedConfiguration);
 						_serviceDescriptors = serviceDescriptors ?? throw new ArgumentNullException(nameof(serviceDescriptors));
+						_consolidatedConfigurationProvider = consolidatedConfigurationProvider ?? throw new ArgumentNullException(nameof(consolidatedConfigurationProvider));
 				}
 
 				public T ResolveDependency<T>()
@@ -59,7 +59,7 @@ namespace Common.Utilities.DependencyInjection.Registration
 
 						foreach (var settingsExport in exports.GetSettingsExports())
 						{
-								_serviceDescriptors.RegisterSettingsExport(settingsExport, _configurationBinder);
+								_serviceDescriptors.RegisterSettingsExport(settingsExport, _consolidatedConfigurationProvider);
 						}
 
 						foreach (var serviceExport in exports.GetServiceExports())
@@ -84,7 +84,7 @@ namespace Common.Utilities.DependencyInjection.Registration
 						_serviceDescriptors.RegisterServiceExport(serviceExport);
 				}
 
-				private readonly IConfigurationBinder _configurationBinder;
+				private readonly IConsolidatedConfigurationProvider _consolidatedConfigurationProvider;
 				private readonly IServiceCollection _serviceDescriptors;
 		}
 }

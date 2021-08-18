@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -42,7 +42,8 @@ namespace Common.Utilities.Jwt.Dependencies.Exports
 								new ServiceExport<ICryptoUtility, CryptoUtility>(RegistrationType.Singleton),
 								new ServiceExport<IJwtTokenEncoder, JwtTokenEncoder>(RegistrationType.Singleton),
 								new ServiceExport<IJwtTokenDecoder, JwtTokenDecoder>(RegistrationType.Singleton),
-								new ServiceExport<IJwtDependencyProvider, JwtDependencyProvider>(RegistrationType.Singleton)
+								new ServiceExport<IJwtDependencyProvider, JwtDependencyProvider>(RegistrationType.Singleton),
+								new ServiceExport<IJwtTokenProvider, JwtTokenProvider>(RegistrationType.Singleton)
 						};
 
 						return serviceExports;
@@ -52,7 +53,7 @@ namespace Common.Utilities.Jwt.Dependencies.Exports
 				{
 						var settingsExports = new List<ISettingsExport>
 						{
-								new SettingsExport<JwtSettings>()
+								new SettingsExport<JwtAuthenticationSettings>()
 						};
 
 						return settingsExports;

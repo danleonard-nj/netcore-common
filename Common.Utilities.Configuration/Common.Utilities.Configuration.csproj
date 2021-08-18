@@ -3,10 +3,19 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 			<PackageId>Common.Utilities.Configuration</PackageId>
-			<Version>1.0.1</Version>
+			<Version>2.0.0</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Binding\**" />
+    <Compile Remove="Managed\**" />
+    <EmbeddedResource Remove="Binding\**" />
+    <EmbeddedResource Remove="Managed\**" />
+    <None Remove="Binding\**" />
+    <None Remove="Managed\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.1" />
@@ -21,9 +30,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Models.Configuration\Common.Models.Configuration.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Configuration.AzureKeyVault\Common.Utilities.Configuration.AzureKeyVault.csproj" />
     <ProjectReference Include="..\Common.Utilities.Cryptography\Common.Utilities.Cryptography.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Exceptions\Common.Utilities.Exceptions.csproj" />
+    <ProjectReference Include="..\Common.Utilities.Helpers\Common.Utilities.Helpers.csproj" />
   </ItemGroup>
 
 </Project>

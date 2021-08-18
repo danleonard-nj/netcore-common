@@ -3,10 +3,14 @@
   <PropertyGroup>
 			<TargetFramework>net5.0</TargetFramework>
 			<PackageId>Common.Utilities.Extensions</PackageId>
-			<Version>1.0.0</Version>
+			<Version>2.0.0</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CommonExtensions.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

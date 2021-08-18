@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 			<PackageId>Common.Utilities.AspNetCore</PackageId>
-			<Version>1.0.4</Version>
+			<Version>2.0.0</Version>
 			<Authors>Dan Leonard</Authors>
 			<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
@@ -20,17 +20,14 @@
     <ProjectReference Include="..\Common.Models.Middleware\Common.Models.Middleware.csproj" />
     <ProjectReference Include="..\Common.Models.UserManagement\Common.Models.UserManagement.csproj" />
     <ProjectReference Include="..\Common.Utilities.Collections\Common.Utilities.Collections.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Configuration.AzureKeyVault\Common.Utilities.Configuration.AzureKeyVault.csproj" />
     <ProjectReference Include="..\Common.Utilities.Configuration\Common.Utilities.Configuration.csproj" />
     <ProjectReference Include="..\Common.Utilities.Cryptography\Common.Utilities.Cryptography.csproj" />
     <ProjectReference Include="..\Common.Utilities.Data\Common.Utilities.Data.csproj" />
     <ProjectReference Include="..\Common.Utilities.DependencyInjection\Common.Utilities.DependencyInjection.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Exceptions\Common.Utilities.Exceptions.csproj" />
     <ProjectReference Include="..\Common.Utilities.Extensions\Common.Utilities.Extensions.csproj" />
     <ProjectReference Include="..\Common.Utilities.Helpers\Common.Utilities.Helpers.csproj" />
     <ProjectReference Include="..\Common.Utilities.Logging\Common.Utilities.Logging.csproj" />
     <ProjectReference Include="..\Common.Utilities.Middleware\Common.Utilities.Middleware.csproj" />
-    <ProjectReference Include="..\Common.Utilities.Reflection\Common.Utilities.Reflection.csproj" />
     <ProjectReference Include="..\Common.Utilities.Swagger\Common.Utilities.Swagger.csproj" />
     <ProjectReference Include="..\Common.Utilities.UnitTesting\Common.Utilities.UnitTesting.csproj" />
     <ProjectReference Include="..\Common.Utilities.UserManagement\Common.Utilities.UserManagement.csproj" />

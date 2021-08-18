@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -11,72 +11,51 @@
  * for more details.
  */
 
-using Common.Utilities.Configuration.Managed;
+
+using Common.Utilities.Configuration.Binding;
 using Common.Utilities.DependencyInjection.Exports.Types.Abstractions;
 using Common.Utilities.DependencyInjection.Registration;
 using Common.Utilities.Jwt;
-using Common.Utilities.Jwt.Configuration;
 using Common.Utilities.Jwt.Dependencies.Exports;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 
 namespace Common.Utilities.AspNetCore
 {
 		public static class AspNetCoreConfiguration
 		{
-				public static void ConfigureAspNetCoreServices<TDependencyExports>(this IServiceCollection serviceDescriptors,
-						IWebHostEnvironment hostEnvironment, AspNetCoreConfigurationOptions aspNetCoreConfigurationOptions = default,
-						JwtTokenProviderOptions jwtOptions = default)
+				public static void RegisterDependencies<TDependencyExports>(this IServiceCollection serviceDescriptors,
+						IConfiguration configuration, AspNetCoreConfigurationOptions aspNetCoreConfigurationOptions = default)
 						where TDependencyExports : IDependencyExport
 				{
 						var _aspNetCoreConfigurationOptions = aspNetCoreConfigurationOptions ?? new AspNetCoreConfigurationOptions();
-						var _jwtOptions = jwtOptions ?? new JwtTokenProviderOptions();
 
-						var managedConfiguration = new ManagedConfiguration(hostEnvironment,
-								_aspNetCoreConfigurationOptions.InjectAzureKeyVaultSecrets);
+						// Swagger
 
-						serviceDescriptors.AddControllers();
+						serviceDescriptors.AddSwaggerGen();
 
-						serviceDescriptors.AddSwaggerGen(c =>
-						{
-								c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-						});
+						// Configurations
 
-						// Add controllers, exception handling
+						var consolidatedProvider = new ConsolidatedConfigurationProvider(
+								_aspNetCoreConfigurationOptions.AzureKeyVaultUri,
+								_aspNetCoreConfigurationOptions.Environment);
 
-						serviceDescriptors.RegisterDependencies<TDependencyExports>(managedConfiguration, _jwtOptions);
+						// Exports
 
-						// Swagger dependencies
+						var exportRegistration = new DependencyExportRegistration(
+								serviceDescriptors, 
+								consolidatedProvider);
 
-
+						exportRegistration.RegisterDependencies<TDependencyExports>();
+						exportRegistration.RegisterDependencies<JwtDependencyExports>();
 				}
 
-				public static void RegisterDependencies<T>(this IServiceCollection serviceDescriptors,
-						IManagedConfiguration managedConfiguration,
-						JwtTokenProviderOptions jwtTokenProviderOptions) where T : IDependencyExport
-				{
-						var exportRegistration = new DependencyExportRegistration(serviceDescriptors, managedConfiguration);
-
-						exportRegistration.RegisterJwtAuthentication(jwtTokenProviderOptions);
-
-						exportRegistration.RegisterDependencies<T>();
-				}
-
-				// Include option to exclude JWT auth
-
-				public static void RegisterJwtAuthentication(this DependencyExportRegistration exportRegistration,
+				public static void ConfigureJwtAuthentication(this IServiceCollection serviceDescriptors,
 						JwtTokenProviderOptions jwtOptions)
 				{
-						exportRegistration.RegisterDependencies<JwtDependencyExports>();
+						// Register the JWT token options
 
-						exportRegistration.RegisterDependency<IJwtTokenProvider, JwtTokenProvider>(serviceProvider =>
-						{
-								var options = serviceProvider.ConfigureJwtTokenProviderOptions(jwtOptions);
-								var provider = serviceProvider.ConfigureJwtTokenProvider(jwtOptions);
-
-								return provider;
-						});
+						serviceDescriptors.AddSingleton(jwtOptions);
 				}	
 		}
 }

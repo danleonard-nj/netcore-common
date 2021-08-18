@@ -12,25 +12,14 @@
  */
 
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Common.Utilities.Configuration.Attributes;
 
-namespace Common.Utilities.AspNetCore.Response.Extensions
+namespace Common.Models.Jwt.Settings
 {
-		public static class AspNetCoreResponseExtensions
+		public class JwtAuthenticationSettings
 		{
-				public static IActionResult ToResponse(this object obj)
-				{
-						var response = new ObjectResult(obj);
-
-						return response;
-				}
-
-				public static T GetInstance<T>(this IConfiguration configuration)
-				{
-						var instance = configuration.GetSection(typeof(T).Name).Get<T>();
-
-						return instance;
-				}
+				[AzureKeyVaultSecret]
+				public string PublicKey { get; set; }
+				public int TokenLifetime { get; set; }
 		}
 }

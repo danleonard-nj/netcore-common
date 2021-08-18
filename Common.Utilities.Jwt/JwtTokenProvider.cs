@@ -1,4 +1,4 @@
-﻿/* Copyright (C) 2012, 2013 Dan Leonard
+﻿/* Copyright (C) 2021 Dan Leonard
  * 
  * This is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free 
@@ -14,7 +14,7 @@
 
 using Common.Models.Jwt;
 using Common.Models.Jwt.Abstractions;
-using Common.Utilities.Exceptions.Authentication;
+using Common.Models.Jwt.Settings;
 using Common.Utilities.Helpers;
 using Common.Utilities.Jwt.Dependencies.Providers;
 using Common.Utilities.Jwt.Encryption;
@@ -22,6 +22,7 @@ using Common.Utilities.Jwt.Extensions;
 using JWT;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 
 namespace Common.Utilities.Jwt
@@ -38,10 +39,12 @@ namespace Common.Utilities.Jwt
 
 		public class JwtTokenProvider : IJwtTokenProvider
 		{
-				public int TokenLifetime { get => _options.TokenLifetime; }
+				public int TokenLifetime { get => _jwtTokenProviderOptions.TokenLifetime; }
 
-				public JwtTokenProvider(IJwtDependencyProvider jwtDependencyProvider,
-						JwtTokenProviderOptions options)
+				private readonly byte[] _publicKey;
+				private readonly int _tokenLifetime;
+
+				public JwtTokenProvider(IJwtDependencyProvider jwtDependencyProvider)
 				{
 						if (jwtDependencyProvider == null)
 						{
@@ -51,13 +54,28 @@ namespace Common.Utilities.Jwt
 						_jwtTokenDecoder = jwtDependencyProvider.GetDecoder();
 						_jwtTokenEncoder = jwtDependencyProvider.GetEncoder();
 						_securityTokenValidator = jwtDependencyProvider.GetSecurityTokenValidator();
+						_jwtTokenProviderOptions = jwtDependencyProvider.GetJwtTokenProviderOptions();
+						_jwtAuthenticationSettings = jwtDependencyProvider.GetJwtAuthenticationSettings();
 
-						_options = options ?? throw new ArgumentNullException(nameof(options));
+						var publicKey = _jwtTokenProviderOptions?.PublicKey ?? _jwtAuthenticationSettings?.PublicKey;
+						
+						if (publicKey == default)
+						{
+								throw new Exception($"{GetType()}: {Caller.GetMethodName()}: No public key found.");
+						}
+
+						_publicKey = publicKey.Encode();
+
+						// Coalesce token lifetime configuration values, default to 60;
+
+						_tokenLifetime = _jwtTokenProviderOptions?.TokenLifetime 
+								?? _jwtAuthenticationSettings?.TokenLifetime ?? TOKEN_LIFETIME_DEFAULT;
 				}
 
 				public async Task<string> GetToken(IJwtPayload jwtPayload)
 				{
-						var token = await _jwtTokenEncoder.GetEncodedToken(jwtPayload, _options.SecurityKey.Encode());
+						var token = await _jwtTokenEncoder.GetEncodedToken(
+								jwtPayload, _publicKey);
 
 						return token;
 				}
@@ -68,7 +86,7 @@ namespace Common.Utilities.Jwt
 						{
 								var payload = await GetPayload(token);
 
-								payload.Refresh(_options.TokenLifetime);
+								payload.Refresh(_tokenLifetime);
 
 								var newToken = await GetToken(payload);
 
@@ -77,13 +95,13 @@ namespace Common.Utilities.Jwt
 
 						else
 						{
-								throw new InvalidTokenException<JwtTokenProvider>(Caller.GetMethodName());
+								throw new AuthenticationException($"{Caller.GetMethodName()}: Invalid Bearer token.");
 						}
 				}
 
 				public async Task<JwtPayload> GetPayload(string token)
 				{
-						var payload = await _jwtTokenDecoder.GetDecodedToken(token, _options.SecurityKey.Encode());
+						var payload = await _jwtTokenDecoder.GetDecodedToken(token, _publicKey);
 
 						return payload;
 				}
@@ -92,26 +110,30 @@ namespace Common.Utilities.Jwt
 				{
 						await Task.Yield();
 
-						var validationParameters = _options.TokenValidationParameters;
+						var validationParameters = _jwtTokenProviderOptions.TokenValidationParameters;
 
 						try
 						{
-								_options.TokenValidationParameters.ValidateIssuerSigningKey = false;
+								_jwtTokenProviderOptions.TokenValidationParameters.ValidateIssuerSigningKey = false;
 
-								_securityTokenValidator.ValidateToken(token, validationParameters, out var validatedToken);
+								_securityTokenValidator.ValidateToken(
+										token, validationParameters, out var validatedToken);
 
 								return true;
 						}
 
-						catch (Exception ex)
+						catch (Exception)
 						{
-								throw new InvalidTokenException<JwtTokenProvider>(Caller.GetMethodName());
+								throw new AuthenticationException($"{Caller.GetMethodName()}: Failed to validate Bearer token.");
 						}
 				}
 
 				private IJwtTokenDecoder _jwtTokenDecoder;
 				private IJwtTokenEncoder _jwtTokenEncoder;
 				private ISecurityTokenValidator _securityTokenValidator;
-				private JwtTokenProviderOptions _options;
+				private JwtTokenProviderOptions _jwtTokenProviderOptions;
+				private JwtAuthenticationSettings _jwtAuthenticationSettings;
+
+				private const int TOKEN_LIFETIME_DEFAULT = 60;
 		}
 }
