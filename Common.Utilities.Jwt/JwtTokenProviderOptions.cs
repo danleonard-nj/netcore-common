@@ -19,7 +19,7 @@ namespace Common.Utilities.Jwt
 {
 		public class JwtTokenProviderOptions
 		{
-				public int TokenLifetime { get; set; } = 5;
+				public int TokenLifetime { get; set; };
 				public string PublicKey { get; set; }
 				public TokenValidationParameters TokenValidationParameters { get; private set; }
 
