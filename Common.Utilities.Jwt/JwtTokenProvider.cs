@@ -107,6 +107,13 @@ namespace Common.Utilities.Jwt
 						return payload;
 				}
 
+				public async Task<T> GetPayload<T>(string token)
+				{
+						var payload = await _jwtTokenDecoder.GetDecodedToken<T>(token, _publicKey);
+
+						return payload;
+				}
+
 				public async Task<bool> ValidateToken(string token)
 				{
 						await Task.Yield();

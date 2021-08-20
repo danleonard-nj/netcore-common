@@ -23,6 +23,7 @@ namespace Common.Utilities.Jwt.Encryption
 		public interface IJwtTokenDecoder
 		{
 				Task<JwtPayload> GetDecodedToken(string token, byte[] encryptionKey);
+				Task<T> GetDecodedToken<T>(string token, byte[] encryptionKey);
 		}
 
 		public class JwtTokenDecoder : IJwtTokenDecoder
@@ -58,6 +59,15 @@ namespace Common.Utilities.Jwt.Encryption
 						await Task.Yield();
 
 						var decoded = _jwtDecoder.DecodeToObject<JwtPayload>(token, encryptionKey, true);
+
+						return decoded;
+				}
+
+				public async Task<T> GetDecodedToken<T>(string token, byte[] encryptionKey)
+				{
+						await Task.Yield();
+
+						var decoded = _jwtDecoder.DecodeToObject<T>(token, encryptionKey, true);
 
 						return decoded;
 				}
