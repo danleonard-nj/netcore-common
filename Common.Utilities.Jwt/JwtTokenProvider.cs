@@ -32,6 +32,7 @@ namespace Common.Utilities.Jwt
 				int TokenLifetime { get; }
 
 				Task<JwtPayload> GetPayload(string token);
+				Task<T> GetPayload<T>(string token);
 				Task<string> GetToken(IJwtPayload jwtPayload);
 				Task<string> GetToken(string token);
 				Task<bool> ValidateToken(string token);
@@ -58,7 +59,7 @@ namespace Common.Utilities.Jwt
 						_jwtAuthenticationSettings = jwtDependencyProvider.GetJwtAuthenticationSettings();
 
 						var publicKey = _jwtTokenProviderOptions?.PublicKey ?? _jwtAuthenticationSettings?.PublicKey;
-						
+
 						if (publicKey == default)
 						{
 								throw new Exception($"{GetType()}: {Caller.GetMethodName()}: No public key found.");
@@ -69,7 +70,7 @@ namespace Common.Utilities.Jwt
 
 						// Coalesce token lifetime configuration values, default to 60;
 
-						_tokenLifetime = _jwtTokenProviderOptions?.TokenLifetime 
+						_tokenLifetime = _jwtTokenProviderOptions?.TokenLifetime
 								?? _jwtAuthenticationSettings?.TokenLifetime ?? TOKEN_LIFETIME_DEFAULT;
 				}
 
